@@ -1,0 +1,80 @@
+﻿body {
+    background-color: rgba(128, 128, 128, 0.3);
+    overflow: auto;
+}
+
+/*div {border: dashed;} */
+
+.personalInfo, .questions, h2 {
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.personalInfo {
+    margin-bottom: 20px;
+}
+
+.heading {
+    margin: 0;
+    padding: 10px;
+    background-color: rgb(111, 191, 244);
+    text-align: center;
+}
+
+.myInfo {
+    float: left;
+
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+
+.myInfo input {
+    width: 400px;
+}
+
+label, select {
+    margin-left: 30px;
+}
+
+select {
+    width: 400px;
+}
+
+.pic {
+    float: right;
+}
+
+.questions {
+    clear: both;
+}
+
+.button {
+    margin: auto 200px;
+}
+
+.button button {
+    margin: 10px 0 10px 600px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+}
+
+h2, label, button, input {
+    font-family: 'Marcellus SC', serif;
+}
+
+h3 {
+    font-family: 'Merienda One', cursive;
+}
+
+footer {
+    background-color: rgb(111, 191, 244);
+    padding: 20px;
+}
+
+ul {
+    margin-left: 180px;
+}
