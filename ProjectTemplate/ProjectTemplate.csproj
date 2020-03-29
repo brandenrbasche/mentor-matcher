@@ -90,6 +90,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AccountServices.asmx" />
+    <Content Include="app.js" />
     <Content Include="CSS\generalStyling.css" />
     <Content Include="Global.asax" />
     <Content Include="HTML\MenteeProfile.html" />
@@ -98,6 +100,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountServices.asmx.cs">
+      <DependentUpon>AccountServices.asmx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
