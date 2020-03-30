@@ -1,0 +1,69 @@
+﻿<!<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mentee Profile</title>
+    <link rel="stylesheet" href="/CSS/generalStyling.css">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="heading">
+        <h1>Registration</h1>
+    </div>
+
+    <h2>Sign Up Its Free!</h2>
+
+    <div class="personalInfo">
+
+        <hr>
+        <h3>Register</h3>
+        <div class="myInfo">
+            <input id="Username" type="text" placeholder="Username (get from DB)"><br>
+            <input id="firstName" type="text" placeholder="First Name (get from DB)"><br>
+            <input id="lastName" type="text" placeholder="Last Name (get from DB)"><br>
+            <input id="email" type="text" placeholder="Email (get from DB)"><br>
+        </div>
+
+    </div>
+
+    <div class="button">
+
+        <button type="button" onclick="save()"> Save </button><br />
+        <button type="submit" onclick="submit()">Submit</button>
+
+    </div>
+
+    <footer>
+
+        <div class="website">
+            <ul>
+                <li><a href="#" name="official web">Company Website</a></li>
+                <li><a href="#">Follow Us on FaceBook</a></li>
+                <li><a href="#">Follow Us on Twitter</a></li>
+            </ul>
+        </div>
+
+    </footer>
+
+    <script>
+
+        window.addEventListener('load', function() {
+            document.querySelector('input[type="file"]').addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    var img = document.querySelector('img');  // $('img')[0]
+                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+                    img.onload = imageIsLoaded;
+                    }
+                });
+            });
+
+        function imageIsLoaded() {
+            alert("The image is uploaded.");  // blob url
+            // update width and height ...
+        }
+
+    </script>
+
+</body>
+</html>

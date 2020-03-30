@@ -1,0 +1,17 @@
+
+body {
+	background-image: url('mentor_3.jfif');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: right bottom;
+	background-size: 50% 90%;
+	background-color: rgba(128, 128, 128, 0.3);
+}
+.heading {
+	margin: 0;
+	padding: .4px;
+	background-color: rgb(111, 191, 244);
+	text-align: center;
+}
+
+

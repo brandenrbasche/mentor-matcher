@@ -95,6 +95,7 @@
     <Content Include="CSS\generalStyling.css" />
     <Content Include="Global.asax" />
     <Content Include="HTML\MenteeProfile.html" />
+    <Content Include="HTML\registration_Page.html" />
     <Content Include="index.html" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="Web.config" />
