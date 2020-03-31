@@ -94,17 +94,20 @@
     <Content Include="app.js" />
     <Content Include="CSS\generalStyling.css" />
     <Content Include="Global.asax" />
+    <Content Include="HTML\index.html" />
+    <Content Include="HTML\mentee_register.html" />
+    <Content Include="HTML\mentor_register.html" />
     <Content Include="HTML\MenteeProfile.html" />
-    <Content Include="HTML\registration_Page.html" />
-    <Content Include="index.html" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountServices.asmx.cs">
       <DependentUpon>AccountServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Accounts.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

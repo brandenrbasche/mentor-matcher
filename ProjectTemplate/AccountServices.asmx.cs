@@ -72,24 +72,23 @@ namespace accountmanager
 
 		//EXAMPLE OF AN INSERT QUERY WITH PARAMS PASSED IN.  BONUS GETTING THE INSERTED ID FROM THE DB!
 		[WebMethod(true)]
-		public void RequestAccount(string user_ID, string University_name, string Fname, string Lname, string Password, string Major, int AdminStatus)
+		public void RegisterAccount(string userName, string fName, string lName, string email, string password, int userType)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
 			//the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
 			//does is tell mySql server to return the primary key of the last inserted row.
-			string sqlSelect = "INSERT INTO User_Accounts (user_ID, University_name, Fname, Lname, Password, Major, AdminStatus) " +
-				"VALUES (@user_IDValue, @University_nameValue, @FnameValue, @LnameValue, @PasswordValue, @MajorValue, @AdminStatusValue); ";
+			string sqlSelect = "INSERT INTO user_table (userName, fName, lName, email, password, userType) " +
+				"VALUES (@userNameValue, @fNameValue, @lNameValue, @emailValue, @passwordValue, @userTypeValue); ";
 			//"SELECT LAST_INSERT_ID();";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-			sqlCommand.Parameters.AddWithValue("@user_IDValue", user_ID);
-			sqlCommand.Parameters.AddWithValue("@University_nameValue", University_name);
-			sqlCommand.Parameters.AddWithValue("@FnameValue", Fname);
-			sqlCommand.Parameters.AddWithValue("@LnameValue", Lname);
-			sqlCommand.Parameters.AddWithValue("@PasswordValue", Password);
-			sqlCommand.Parameters.AddWithValue("@MajorValue", Major);
-			sqlCommand.Parameters.AddWithValue("@AdminStatusValue", AdminStatus);
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@fNameValue", fName);
+			sqlCommand.Parameters.AddWithValue("@lNameValue", lName);
+			sqlCommand.Parameters.AddWithValue("@emailValue", email);
+			sqlCommand.Parameters.AddWithValue("@passwordValue", password);
+			sqlCommand.Parameters.AddWithValue("@userTypeValue", userType);
 
 			sqlConnection.Open();
 			//we're using a try/catch so that if the query errors out we can handle it gracefully
@@ -110,26 +109,23 @@ namespace accountmanager
 			sqlConnection.Close();
 		}
 
-		// METHOD TO HANDLE GRADE ENTRY DATA
-		[WebMethod(EnableSession = true)]
-		public void HandleGradeEntryData(int Year, string Term, int Total_Credits, double CurrentGPA)
+		[WebMethod(true)]
+		public void InsertMatchingResponses(string userName, string q1, string q2, string q3, string q4)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "INSERT INTO responses (userName, q1, q2, q3, q4) " +
+				"VALUES (@userNameValue, @q1Value, @q2Value, @q3Value, @q4Value); ";
 
-			string sqlSelect = "INSERT INTO Grades (Year, Term, Total_Credits, CurrentGPA) " +
-				"VALUES (@yearValue, @termValue, @totalCreditsValue, @currentGpaValue);";
-
-			//"SELECT LAST_INSERT_ID();";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-			sqlCommand.Parameters.AddWithValue("@yearValue", Year);
-			sqlCommand.Parameters.AddWithValue("@termValue", Term);
-			sqlCommand.Parameters.AddWithValue("@totalCreditsValue", Total_Credits);
-			sqlCommand.Parameters.AddWithValue("@currentGpaValue", CurrentGPA);
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@q1Value", q1);
+			sqlCommand.Parameters.AddWithValue("@q2Value", q2);
+			sqlCommand.Parameters.AddWithValue("@q3Value", q3);
+			sqlCommand.Parameters.AddWithValue("@q4Value", q4);
 
 			sqlConnection.Open();
-
 			try
 			{
 				sqlCommand.ExecuteNonQuery();
@@ -159,43 +155,26 @@ namespace accountmanager
 			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
 			//filling the data table
 			sqlDa.Fill(sqlDt);
-			//loop through each row in the dataset, creating instances
-			//of our container class Account. Fill each acciount with
-			//data from the rows, then dump them in a list.
-			//List<Grade> grades = new List<Grade>();
-			//for (int i = 0; i < sqlDt.Rows.Count; i++)
-			//{
-			//	grades.Add(new Grade
-			//	{
-			//		Year = Convert.ToInt32(sqlDt.Rows[i]["Year"]),
-			//		user_ID = Convert.ToInt32(sqlDt.Rows[i]["user_ID"]),
-			//		Term = sqlDt.Rows[i]["Term"].ToString(),
-			//		Total_Credits = Convert.ToDouble(sqlDt.Rows[i]["Total_Credits"]),
-			//		CurrentGPA = Convert.ToDouble(sqlDt.Rows[i]["CurrentGPA"]),
-			//	});
-			//}
-			//convert the list of accounts to an array and return!
-			//System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
-			//this.Context.Response.ContentType = "application/json; charset=utf-8";
-			//this.Context.Response.Write(jss.Serialize(grades.ToArray()));
+
 		}
 
 		//EXAMPLE OF AN UPDATE QUERY WITH PARAMS PASSED IN
 		[WebMethod]
-		public void UpdateAccount(string user_ID, string University_name, string Password, string Fname, string Lname, string Major)
+		public void UpdateAccount(string userName, string fName, string lName, string email, string password, int userType)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
 			//this is a simple update, with parameters to pass in values
-			string sqlSelect = "update User_Accounts set user_ID=@uidValue, University_name=@uname, Password=@passValue, Fname=@fnameValue, Lname=@lnameValue," +
-				"Major=@majorValue where user_ID=@uidValue";
+			string sqlSelect = "update user_table set userName=@userNameValue, fName=@fNameValue, lName=@lNameVaule, email=@emailValue, password=@passwordValue, userType=@userTypeValue" +
+				"where userName = @userNameValue";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
-			sqlCommand.Parameters.AddWithValue("@uidValue", HttpUtility.UrlDecode(user_ID));
-			sqlCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(Password));
-			sqlCommand.Parameters.AddWithValue("@fnameValue", HttpUtility.UrlDecode(Fname));
-			sqlCommand.Parameters.AddWithValue("@lnameValue", HttpUtility.UrlDecode(Lname));
-			sqlCommand.Parameters.AddWithValue("@majorValue", HttpUtility.UrlDecode(Major));
-			sqlCommand.Parameters.AddWithValue("@uname", HttpUtility.UrlDecode(University_name));
+			sqlCommand.Parameters.AddWithValue("@userNameVaule", HttpUtility.UrlDecode(userName));
+			sqlCommand.Parameters.AddWithValue("@fNameValue", HttpUtility.UrlDecode(fName));
+			sqlCommand.Parameters.AddWithValue("@lNameValue", HttpUtility.UrlDecode(lName));
+			sqlCommand.Parameters.AddWithValue("@emailValue", HttpUtility.UrlDecode(email));
+			sqlCommand.Parameters.AddWithValue("@passwordValue", HttpUtility.UrlDecode(password));
+			sqlCommand.Parameters.AddWithValue("@userTypeValue", userType); // need to find a fix for this!
+
 			sqlConnection.Open();
 			//we're using a try/catch so that if the query errors out we can handle it gracefully
 			//by closing the connection and moving on
@@ -210,17 +189,17 @@ namespace accountmanager
 		}
 
 		[WebMethod(EnableSession = true)]
-		public Account[] GetAccountRequests(string user_ID)
+		public Account[] GetAccountRequests(string userName)
 		{
-			DataTable sqlDt = new DataTable("User_Accounts");
+			DataTable sqlDt = new DataTable("user_table");
 
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-			string sqlSelect = "SELECT * FROM User_Accounts WHERE user_ID = @userIdValue";
+			string sqlSelect = "SELECT * FROM user_table WHERE userName = @userNameVaule";
 
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
-			sqlCommand.Parameters.AddWithValue("@user_IDValue", user_ID);
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
 
 			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
 			sqlDa.Fill(sqlDt);
@@ -229,17 +208,15 @@ namespace accountmanager
 			for (int i = 0; i < sqlDt.Rows.Count; i++)
 				accountRequests.Add(new Account
 				{
-					user_ID = sqlDt.Rows[i]["user_ID"].ToString(),
-					University_name = sqlDt.Rows[i]["University_name"].ToString(),
-					Fname = sqlDt.Rows[i]["Fname"].ToString(),
-					Lname = sqlDt.Rows[i]["Lname"].ToString(),
-					Password = sqlDt.Rows[i]["Password"].ToString(),
-					Major = sqlDt.Rows[i]["Major"].ToString(),
-					AdminStatus = Convert.ToInt32(sqlDt.Rows[i]["AdminStatus"])
-				});
+					userName = sqlDt.Rows[i]["userName"].ToString(),
+					fName = sqlDt.Rows[i]["fName"].ToString(),
+					lName = sqlDt.Rows[i]["lName"].ToString(),
+					email = sqlDt.Rows[i]["email"].ToString(),
+					password = sqlDt.Rows[i]["password"].ToString(),
+					userType = Convert.ToInt32(sqlDt.Rows[i]["userType"])
+				}); 
 			return accountRequests.ToArray();
 		}
-		//return GetAccountRequests.ToArray();
 
 
 		//EXAMPLE OF A DELETE QUERY
@@ -345,13 +322,12 @@ namespace accountmanager
 			{
 				Accounts.Add(new Account
 				{
-					//user_ID = Convert.ToInt32(sqlDt.Rows[i]["user_ID"]),
-					user_ID = sqlDt.Rows[i]["user_ID"].ToString(),
-					University_name = sqlDt.Rows[i]["University_name"].ToString(),
-					Fname = sqlDt.Rows[i]["Fname"].ToString(),
-					Lname = sqlDt.Rows[i]["Lname"].ToString(),
-					Password = sqlDt.Rows[i]["Password"].ToString(),
-					Major = sqlDt.Rows[i]["Major"].ToString(),
+					userName = sqlDt.Rows[i]["userName"].ToString(),
+					fName = sqlDt.Rows[i]["fName"].ToString(),
+					lName = sqlDt.Rows[i]["lName"].ToString(),
+					email = sqlDt.Rows[i]["email"].ToString(),
+					password = sqlDt.Rows[i]["password"].ToString(),
+					userType = Convert.ToInt32(sqlDt.Rows[i]["userType"])
 				});
 			}
 			//convert the list of accounts to an array and return!
@@ -362,38 +338,32 @@ namespace accountmanager
 		}
 
 		[WebMethod(true)]
-		public void UpdateUserAccount(string user_ID, string University_name, string Fname, string Lname, string Password, string Major)//, int AdminStatus)
+		public void UpdateUserAccount(string userName, string fName, string lName, string email, string password, int userType)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
 			//the only thing fancy about this query is SELECT LAST_INSERT_ID() at the end.  All that
 			//does is tell mySql server to return the primary key of the last inserted row.
-			string sqlSelect = "UPDATE User_Accounts SET user_ID=@user_IDValue, University_name=@University_nameValue, Fname=@FnameValue, Lname=@LnameValue, Password=@PasswordValue, Major=@MajorValue WHERE user_ID = @user_IDValue";
+			string sqlSelect = "UPDATE user_table SET userName=@userNameValue, fName=@fNameValue, lName=@lNameValue, email=@emailValue, password=@passwordValue, userType=@userTypeValue WHERE userName=@userNameValue";
 			//"SELECT LAST_INSERT_ID();";
+
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
-			//sqlConnection.Open();
-			//sqlCommand.Parameters.AddWithValue("@user_IDValue", HttpUtility.UrlDecode(uid));
-			//sqlCommand.Parameters.Add("@user_IDValue", uid);
-			//sqlCommand.Parameters.AddWithValue("@user_IDValue", Convert.ToInt32(uid));
-			sqlCommand.Parameters.AddWithValue("@user_IDValue", user_ID);
-			sqlCommand.Parameters.AddWithValue("@University_nameValue", University_name);
-			sqlCommand.Parameters.AddWithValue("@FnameValue", Fname);
-			sqlCommand.Parameters.AddWithValue("@LnameValue", Lname);
-			sqlCommand.Parameters.AddWithValue("@PasswordValue", Password);
-			sqlCommand.Parameters.AddWithValue("@MajorValue", Major);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@fNameValue", fName);
+			sqlCommand.Parameters.AddWithValue("@lNameValue", lName);
+			sqlCommand.Parameters.AddWithValue("@emailValue", email);
+			sqlCommand.Parameters.AddWithValue("@passwordValue", password);
+			sqlCommand.Parameters.AddWithValue("@userTypeValue", userType);
+
 			//filling the data table
 			//convert the list of accounts to an array and return!
-			//return User_Accounts.ToArray();
-			//sqlCommand.Parameters.AddWithValue("@user_IDValue", HttpUtility.UrlDecode(user_ID));
-			//sqlCommand.Parameters.AddWithValue("@University_nameValue", HttpUtility.UrlDecode(University_name));
-			//sqlCommand.Parameters.AddWithValue("@FnameValue", HttpUtility.UrlDecode(Fname));
-			//sqlCommand.Parameters.AddWithValue("@LnameValue", HttpUtility.UrlDecode(Lname));
-			//sqlCommand.Parameters.AddWithValue("@PasswordValue", HttpUtility.UrlDecode(Password));
-			// sqlCommand.Parameters.AddWithValue("@MajorValue", HttpUtility.UrlDecode(Major));
+
 			//this time, we're not using a data adapter to fill a data table.  We're just
 			//opening the connection, telling our command to "executescalar" which says basically
 			//execute the query and just hand me back the number the query returns (the ID, remember?).
 			//don't forget to close the connection!
+
 			sqlConnection.Open();
 			//we're using a try/catch so that if the query errors out we can handle it gracefully
 			//by closing the connection and moving on

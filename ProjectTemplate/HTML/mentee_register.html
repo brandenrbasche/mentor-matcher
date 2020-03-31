@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mentee Sign Up</title>
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/generalStyling.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="heading">
+        <h2>Mentee Sign Up</h2>
+        <a href="mentor_register.html">I'm a Mentor</a>
+        <a href="index.html">I already have an account</a>
+    </div>
+
+    <div class="register">
+        <form class="registrationForm">
+            <h3>Personal Info</h3>
+            <input type="text" placeholder="Username" id="userName"><br />
+            <input type="text" placeholder="First Name" id="fNameInputId" required /><br />
+            <input type="text" placeholder="Last Name" id="lNameInputId" required /><br />
+            <input type="email" placeholder="Email" id="emailInputId" required /><br />
+            <input type="password" placeholder="Password" id="passwordInputId" required /><br />
+            <input type="password" placeholder="Confirm Password" id="confirmPassInputId" required />
+
+            <h3>Questionnaire</h3>
+            <h4>This data will be used to match you with the best possible mentor. There is no right or wrong answer!</h4>
+
+            <label for="q1">What are your professional goals?</label>
+            <select id="q1Id" name="q2" required>
+                <option value="Vertical movement within the company">Vertical movement within the company</option>
+                <option value="Financial success">Financial success (high net worth)</option>
+                <option value="A strong network">A strong network (having strong connections)</option>
+            </select>
+            <br />
+            <label for="q2">What do you look for most in a company?</label>
+            <select id="q2Id" name="q2" required>
+                <option value="Work/life balance">Work/life balance</option>
+                <option value="Collaborative workspace">Collaborative workspace</option>
+                <option value="Closed workspace">Closed workspace (cubicles)</option>
+                <option value="Movement within the company">Movement within the company</option>
+                <option value="Employee bonding events">Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
+                <option value="Flexibility">Flexibility (work from home, PTO, etc.)</option>
+            </select>
+            <br />
+            <label for="q3">What do you look for most in a mentor?</label>
+            <select id="q3Id" name="q3" required>
+                <option value="Age similarity">Age similarity</option>
+                <option value="Relevant industry expertise/experience">Relevant industry expertise/experience</option>
+                <option value="Same career trajectory">Same career trajectory (mentor in the same position as mentee last year)</option>
+                <option value="Reliability">Reliability (someone who replies quickly and is always there when needed)</option>
+                <option value="Professional development assistance">Professional development assistance (someone to look over resume, cover letter, LinkedIn, etc.)</option>
+            </select>
+            <br />
+            <label for="q4">How involved would you like your mentor to be?</label>
+            <select id="q4Id" name="q4" required>
+                <option value="Highly involved">Highly involved</option>
+                <option value="Somewhat involved">Somewhat involved</option>
+                <option value="Indifferent">Indifferent</option>
+                <option value="Rarely involved">Rarely involved</option>
+            </select>
+            <br /><br />
+            <button type="button" onclick="formValidation(this.form)" >Sign Up</button>
+        </form>
+    </div>
+
+    <script src="../app.js"></script>
+</body>
+</html>
