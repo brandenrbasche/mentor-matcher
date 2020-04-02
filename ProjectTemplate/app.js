@@ -3,24 +3,24 @@
 --------------------------------- */
 function formValidation(form) {
     var responses = form.elements;
-    if(!form.checkValidity()) {
-        for(var i=0; i<responses.length; i++) {
-            if(responses[i].value == "") {
+    if (!form.checkValidity()) {
+        for (var i = 0; i < responses.length; i++) {
+            if (responses[i].value == "") {
                 alert("Cannot leave fields blank.");
                 break;
             }
 
-            if(!form[3].checkValidity()) {
+            if (!form[3].checkValidity()) {
                 alert("Please enter a correct email.");
                 break;
             }
         }
     }
-    if(responses[4].value != responses[5].value) {
+    if (responses[4].value != responses[5].value) {
         alert("Passwords must match.");
     }
 
-    if(window.location.href.includes("mentee_register.html")) {
+    if (window.location.href.includes("mentee_register.html")) {
         registerMentee(responses);
     } else {
         registerMentor(responses);
@@ -53,11 +53,11 @@ function registerMentee(responses) {
     // Inserts menteeResponses into the user_table table!
     $.ajax({
         type: 'POST',
-        url:"../AccountServices.asmx/RegisterAccount",
+        url: "../AccountServices.asmx/RegisterAccount",
         data: JSON.stringify(menteeResponses),
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        success: function(msg) {
+        success: function (msg) {
             console.log("menteeResponses succesfully added to user_table");
         }
     });
@@ -123,4 +123,63 @@ function registerMentor(responses) {
             window.location.href = "index.html"
         }
     });
+}
+
+/* -----------------------------
+    MENTEE / MENTOR PROFILE
+--------------------------------- */
+// Create a "close" button and append it to each list item
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// Add a "checked" symbol when clicking on a list item
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// Create a new list item when clicking on the "Add" button
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("You must write something!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
 }
