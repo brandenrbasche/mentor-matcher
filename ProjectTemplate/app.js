@@ -124,6 +124,133 @@ function registerMentor(responses) {
         }
     });
 }
+/* -----------------------------
+    MENTEE/MENTOR LOGIN
+--------------------------------- */
+function LogOn() {
+    let userName = document.getElementById("userName").value;
+    let Password = document.getElementById("password").value;
+    console.log(userName);
+    console.log(Password);
+    var userEntry = '';
+    var firstName = '';
+    loginInfo = {
+        "userName": userName,
+        "Password": Password
+    };
+    getData = { "userName": userName };
+
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/LogOn",
+        data: JSON.stringify(loginInfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (msg) {
+            console.log(msg);
+            for (key in msg) {
+                console.log(key, msg[key]);
+                console.log(msg[key]);
+                trueFalse = msg[key];
+            }
+                
+            if (trueFalse == true) {
+                alert("Login Successful");
+                $.ajax({
+                    type: 'POST',
+                    url: "../AccountServices.asmx/GetAccountData",
+                    data: JSON.stringify(getData),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        //console.log(Accounts);
+                        //alert("hey you");
+                        //console.log("what");
+                        //console.log(userName);
+                        //console.log()
+                        for (key in data) {
+                            console.log(key, data[key]);
+                            //console.log(data[key]);
+                            //console.log(data[key[0]]);
+                            console.log(data[key][0]);
+                            var newData = data[key][0];
+                            for (yam in newData) {
+                                console.log(yam);
+                                var temp = yam;
+                                if (temp == 'fName') {
+                                    firstName = newData[yam];
+                                    console.log(firstName);
+                                    console.log(newData[yam]);
+
+                                }
+                                if (temp == 'userType') {
+
+                                    var mentStatus = newData[yam];
+                                    console.log(mentStatus);
+                                    if (mentStatus == 1) {
+                                        window.location.href = "MentorProfile.html"
+                                        //document.getElementById("welcomeNameId").innerHTML = firstName;
+                                        console.log(mentStatus);
+                                    }
+                                    else {
+                                        window.location.href = "MenteeProfile.html"
+                                        //document.getElementById("welcomeId").innerHTML = firstName;
+                                    }
+                                }
+                                console.log(yam[1]);
+                            }
+                            console.log(yam + ' ' + newData[yam]);
+                            if (yam = userName) {
+                                console.log(yam);
+                                userEntry = yam;
+                            }
+                            //if (newData[yam] = userType) {
+                            //    console.log(yam);
+                            //    mentStatus = yam;
+                            //}
+                        }
+                        //console.log(newData[yam][1]);
+                        //console.log(newData[yam][1]);
+                        //console.log(data[key][0][userName]);
+                        //console.log(data[key][0[userName]]);
+                        //for (val in data[key]) {
+                        //    console.log(val);
+                        //}
+                        //trueFalse1 = data[key];
+                        //console.log("WTF");
+                       
+
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("you suck");
+                        console.log(XMLHttpRequest);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    }
+                });
+                //console.log(msg1);
+                //window.location.href = "MenteeProfile.html"
+            }
+                
+                else {
+                    alert("You have failed the vibe check");
+                }
+            
+            
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("you failure");
+        }
+    });
+    
+}
+
+
+
+
+
+
 
 /* -----------------------------
     MENTEE / MENTOR PROFILE

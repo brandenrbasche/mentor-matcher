@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <title>Mentor Matcher</title>
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../CSS/generalStyling.css">
+    <script src="../app.js"></script>
 </head>
 <body>
 
@@ -21,7 +23,7 @@
         <form id="loginFormId">
             <input id="userName" placeholder="Username" type="text" /><br />
             <input id="password" placeholder="Password" type="password" /><br />
-            <button type="button">Log In</button>
+            <button type="button" onclick="LogOn()">Log In</button>
         </form>
     </div>
 
@@ -32,6 +34,6 @@
         <button type="button" onclick="location.href='mentee_register.html'">I'm a Mentee</button>
         <button type="button" onclick="location.href='mentor_register.html'">I'm a Mentor</button>
     </div>
-
+    
 </body>
 </html>

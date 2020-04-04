@@ -21,8 +21,8 @@ namespace accountmanager
 	public class AccountServices : System.Web.Services.WebService
 	{
 
-		[WebMethod]
-		public bool LogOn(string user_ID, string pass)
+		[WebMethod(true)]
+		public bool LogOn(string userName, string Password)
 		{
 			//LOGIC: pass the parameters into the database to see if an account
 			//with these credentials exist.  If it does, then return true.  If
@@ -32,7 +32,7 @@ namespace accountmanager
 			//our connection string comes from our web.config file like we talked about earlier
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
 			//here's our query.  A basic select with nothing fancy.  Note the parameters that begin with @
-			string sqlSelect = "SELECT user_ID FROM User_Accounts WHERE user_ID=@idValue and Password=@passValue";
+			string sqlSelect = "SELECT userName FROM user_table WHERE userName=@idValue and Password=@passValue";
 			//set up our connection object to be ready to use our connection string
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			//set up our command object to use our connection, and our query
@@ -40,8 +40,8 @@ namespace accountmanager
 			//tell our command to replace the @parameters with real values
 			//we decode them because they came to us via the web so they were encoded
 			//for transmission (funky characters escaped, mostly)
-			sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(user_ID));
-			sqlCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(pass));
+			sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(userName));
+			sqlCommand.Parameters.AddWithValue("@passValue", HttpUtility.UrlDecode(Password));
 			//a data adapter acts like a bridge between our command object and 
 			//the data we are trying to get back and put in a table object
 			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
@@ -55,6 +55,7 @@ namespace accountmanager
 			{
 				//flip our flag to true so we return a value that lets them know they're logged in
 				success = true;
+                
 			}
 			//return the result!
 			return success;
@@ -298,7 +299,7 @@ namespace accountmanager
 
 
 		[WebMethod(EnableSession = true)]
-		public void GetAccountData()
+		public accountmanager.Account[] GetAccountData(string userName)
 		{
 			//check out the return type. It's an array of Account objects. You can look at our custom Account class in this solution to see that it's 
 			//just a container for public class-level variables. It's a simple container that asp.net will have no trouble converting into json. When we return
@@ -307,11 +308,12 @@ namespace accountmanager
 			//LOGIC: get all the active accounts and return them!
 			DataTable sqlDt = new DataTable("Accounts");
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-			string sqlSelect = "select user_ID, University_name, Fname, Lname, Password, Major from User_Accounts order by user_ID";
+			string sqlSelect = "select userName, fName, lName, email, password, userType from user_table where userName=@idValue order by userName";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
-			//gonna use this to fill a data table
-			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            //gonna use this to fill a data table
+            sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(userName));
+            MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
 			//filling the data table
 			sqlDa.Fill(sqlDt);
 			//loop through each row in the dataset, creating instances
@@ -330,14 +332,16 @@ namespace accountmanager
 					userType = Convert.ToInt32(sqlDt.Rows[i]["userType"])
 				});
 			}
-			//convert the list of accounts to an array and return!
-			//return User_Accounts.ToArray();
-			System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
-			this.Context.Response.ContentType = "application/json; charset=utf-8";
-			this.Context.Response.Write(jss.Serialize(Accounts.ToArray()));
+            //convert the list of accounts to an array and return!
+            //return User_Accounts.ToArray();
+            //System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+            //this.Context.Response.ContentType = "application/json; charset=utf-8";
+            //this.Context.Response.Write(jss.Serialize(Accounts.ToArray()));
+            return Accounts.ToArray();
 		}
+    
 
-		[WebMethod(true)]
+        [WebMethod(true)]
 		public void UpdateUserAccount(string userName, string fName, string lName, string email, string password, int userType)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
