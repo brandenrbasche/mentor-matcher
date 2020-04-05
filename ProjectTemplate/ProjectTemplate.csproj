@@ -95,13 +95,16 @@
     <Content Include="CSS\generalStyling.css" />
     <Content Include="CSS\loginPage.css" />
     <Content Include="CSS\mentor_3.jfif" />
+    <Content Include="CSS\profile-avatar.jpg" />
     <Content Include="CSS\profileStyles.css" />
     <Content Include="Global.asax" />
     <Content Include="HTML\index.html" />
+    <Content Include="HTML\loginPage.html" />
     <Content Include="HTML\mentee_register.html" />
     <Content Include="HTML\MentorProfile.html" />
     <Content Include="HTML\mentor_register.html" />
     <Content Include="HTML\MenteeProfile.html" />
+    <Content Include="HTML\registerPage1.html" />
     <Content Include="ProjectServices.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
