@@ -137,6 +137,57 @@ namespace accountmanager
 			sqlConnection.Close();
 		}
 
+		[WebMethod(true)]
+		public void InsertResponseValues(string userName, string responseId)
+		{
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "INSERT INTO user_responses_table (userName, responseId) " +
+				"VALUES (@userNameValue, @responseIdValue); ";
+
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@responseIdValue", responseId);
+
+			sqlConnection.Open();
+			try
+			{
+				sqlCommand.ExecuteNonQuery();
+			}
+			catch (Exception e)
+			{
+			}
+			sqlConnection.Close();
+		}
+
+		[WebMethod]
+		public void GetMatches(string userName)
+		{
+			DataTable sqlDt = new DataTable("matches");
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "select @userNameValue as 'Mentee', ru.userName as 'Mentor', eu.email as 'Mentee Email', ru.email as 'Mentor Email',count(*) as Commonality " +
+							   "from user_table eu " +
+							   "join user_responses_table eus on eu.userName = eus.userName " +
+						       "join responses_table es on eus.responseId = es.responseId " +
+							   "join user_responses_table rus on eus.responseId = rus.responseId " +
+							   "join user_table ru on rus.userName = ru.userName " +
+							   "where eu.userType = 1 " +
+							        "and eu.userName != ru.userName " +
+									"group by eu.userName, ru.userName " +
+									"order by eu.userName, ru.userName; ";
+
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+
+			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+			sqlDa.Fill(sqlDt);
+
+			return sqlDt.ToArray();
+		}
+
 		//EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
 		[WebMethod(EnableSession = true)]
 		//[ScriptMethod(ResponseFormat = ResponseFormat.Json)]
@@ -294,9 +345,6 @@ namespace accountmanager
 				sqlConnection.Close();
 			}
 		}
-
-
-
 
 		[WebMethod(EnableSession = true)]
 		public accountmanager.Account[] GetAccountData(string userName)
