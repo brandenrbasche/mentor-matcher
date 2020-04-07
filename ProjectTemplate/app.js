@@ -181,6 +181,8 @@ function logOn() {
     };
     getData = { "userName": userName };
 
+    localStorage.setItem('userName', userName);
+
     $.ajax({
         type: 'POST',
         url: "../AccountServices.asmx/LogOn",
@@ -258,23 +260,18 @@ function logOn() {
             alert("you failure");
         }
     });
+
 }
 
 /* -----------------------------
     MENTEE / MENTOR PROFILE
 --------------------------------- */
-//function loadProfileData() {
-//    $.ajax({
-//        type: 'GET',
-//        url: 'index.html',
-//        data: JSON.stringify(getData),
-//        contentType: 'application/json; charset=utf-8',
-//        dataType: 'json',
-//        success: function () {
-//            console.log(getData);
-//        }
-//    });
-//}
+function passUserName() {
+    console.log(localStorage.getItem('userName'));
+    let welcomeName = document.getElementById('welcomeNameId');
+    let userLogin = localStorage.getItem('userName');
+    welcomeName.innerHTML = userLogin;
+}
 
 
 

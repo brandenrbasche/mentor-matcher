@@ -185,7 +185,7 @@ namespace accountmanager
 			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
 			sqlDa.Fill(sqlDt);
 
-			return sqlDt.ToArray();
+			//return sqlDt.ToArray();
 		}
 
 		//EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
