@@ -3,6 +3,7 @@
 --------------------------------- */
 function formValidation(form) {
     var responses = form.elements;
+    console.log(responses);
     if (!form.checkValidity()) {
         for (var i = 0; i < responses.length; i++) {
             if (responses[i].value == "") {
@@ -44,10 +45,29 @@ function registerMentee(responses) {
 
     var matchingObj = {
         "userName": responses[0].value,
-        "q1": responses[6].value,
-        "q2": responses[7].value,
-        "q3": responses[8].value,
-        "q4": responses[9].value
+        "q1": responses[6],
+        "q2": responses[7],
+        "q3": responses[8],
+        "q4": responses[9]
+    };
+
+    for (var i = 0; i < 4; i++) {
+        let responseObj = {
+            "userName": responses[0].value,
+            "responseId": responses[i+6].value
+        }
+        // Inserts responseObj into user_responses_table!
+        $.ajax({
+            type: 'POST',
+            url: '../AccountServices.asmx/InsertResponseValues',
+            data: JSON.stringify(responseObj),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (msg) {
+                console.log("Response " + i + " added to user_responses_table!");
+            }
+        });
+
     };
 
     // Inserts menteeResponses into the user_table table!
@@ -72,7 +92,7 @@ function registerMentee(responses) {
         success: function (msg) {
             console.log("matchingObj sucessfully added to responses table");
             alert("Mentee account created!");
-            window.location.href = "index.html"
+            //window.location.href = "index.html"
         }
     });
 }
@@ -96,6 +116,25 @@ function registerMentor(responses) {
         "q2": responses[7].value,
         "q3": responses[8].value,
         "q4": responses[9].value
+    };
+
+    for (var i = 0; i < 4; i++) {
+        let responseObj = {
+            "userName": responses[0].value,
+            "responseId": responses[i + 6].value
+        }
+        // Inserts responseObj into user_responses_table!
+        $.ajax({
+            type: 'POST',
+            url: '../AccountServices.asmx/InsertResponseValues',
+            data: JSON.stringify(responseObj),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+            success: function (msg) {
+                console.log("Response " + i + " added to user_responses_table!");
+            }
+        });
+
     };
 
     // Inserts mentorResponses into the user_table table!
@@ -123,11 +162,13 @@ function registerMentor(responses) {
             window.location.href = "index.html"
         }
     });
+
+    // Insert 
 }
 /* -----------------------------
     MENTEE/MENTOR LOGIN
 --------------------------------- */
-function LogOn() {
+function logOn() {
     let userName = document.getElementById("userName").value;
     let Password = document.getElementById("password").value;
     console.log(userName);
@@ -155,7 +196,7 @@ function LogOn() {
             }
                 
             if (trueFalse == true) {
-                alert("Login Successful");
+                //alert("Login Successful");
                 $.ajax({
                     type: 'POST',
                     url: "../AccountServices.asmx/GetAccountData",
@@ -164,15 +205,8 @@ function LogOn() {
                     dataType: 'json',
                     success: function (data) {
                         console.log(data);
-                        //console.log(Accounts);
-                        //alert("hey you");
-                        //console.log("what");
-                        //console.log(userName);
-                        //console.log()
                         for (key in data) {
                             console.log(key, data[key]);
-                            //console.log(data[key]);
-                            //console.log(data[key[0]]);
                             console.log(data[key][0]);
                             var newData = data[key][0];
                             for (yam in newData) {
@@ -190,12 +224,12 @@ function LogOn() {
                                     console.log(mentStatus);
                                     if (mentStatus == 1) {
                                         window.location.href = "MentorProfile.html"
-                                        //document.getElementById("welcomeNameId").innerHTML = firstName;
+                                        document.getElementById("welcomeNameId").innerHTML = firstName;
                                         console.log(mentStatus);
                                     }
                                     else {
                                         window.location.href = "MenteeProfile.html"
-                                        //document.getElementById("welcomeId").innerHTML = firstName;
+                                        document.getElementById("welcomeId").innerHTML = firstName;
                                     }
                                 }
                                 console.log(yam[1]);
@@ -205,56 +239,45 @@ function LogOn() {
                                 console.log(yam);
                                 userEntry = yam;
                             }
-                            //if (newData[yam] = userType) {
-                            //    console.log(yam);
-                            //    mentStatus = yam;
-                            //}
                         }
-                        //console.log(newData[yam][1]);
-                        //console.log(newData[yam][1]);
-                        //console.log(data[key][0][userName]);
-                        //console.log(data[key][0[userName]]);
-                        //for (val in data[key]) {
-                        //    console.log(val);
-                        //}
-                        //trueFalse1 = data[key];
-                        //console.log("WTF");
-                       
-
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        alert("you suck");
+                        alert("Wrong username or password. Try again!");
                         console.log(XMLHttpRequest);
                         console.log(textStatus);
                         console.log(errorThrown);
                     }
                 });
-                //console.log(msg1);
-                //window.location.href = "MenteeProfile.html"
             }
                 
                 else {
                     alert("You have failed the vibe check");
-                }
-            
-            
+                }      
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             alert("you failure");
         }
     });
-    
 }
-
-
-
-
-
-
 
 /* -----------------------------
     MENTEE / MENTOR PROFILE
 --------------------------------- */
+//function loadProfileData() {
+//    $.ajax({
+//        type: 'GET',
+//        url: 'index.html',
+//        data: JSON.stringify(getData),
+//        contentType: 'application/json; charset=utf-8',
+//        dataType: 'json',
+//        success: function () {
+//            console.log(getData);
+//        }
+//    });
+//}
+
+
+
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;

@@ -1,132 +1,62 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentee Profile</title>
-    <link rel="stylesheet" href="../CSS/generalStyling.css">
-    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap" rel="stylesheet">
-    <style type="text/css">
-        * {
-            box-sizing: border-box;
-        }
-    </style>
+    <title>Mentor Profile</title>
+    <link rel="stylesheet" href="../CSS/profileStyles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap"
+          rel="stylesheet">
 </head>
+
 <body>
-
-
-    <div class="heading">
-        <h1>My Profile</h1>
+    <div class="row">
+        <div class="heading col-lg-12 col-md-12 skyblue">
+            <h1>Mentor Matcher</h1>
+        </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="emptySpace col-lg-03 col-md-02"></div>
+            <div class="subheading col-lg-06 col-md-08">
+                <h2><i>Welcome back, <span id="welcomeNameId"></span></i></h2>
+            </div>
+            <div class="emptySpace col-lg-03 col-md-02"></div>
+        </div>
+        <div class="row">
+            <hr class="col-lg-12 co-md-12 yel">
+        </div>
+        <div class="row">
+            <div class="rowGoal">
+                <div class="column left">
+                    <h2>Goal tracker:</h2>
+                    <div class="header" id="myDIV">
+                        <input type="text" id="myInput" placeholder="I want to...">
+                        <span onclick="newElement()" class="addBtn">Add</span>
+                    </div>
+                    <ul id="myUL">
+                        <!-- GOALS INSERTED HERE -->
+                    </ul>
+                </div>
 
-    <h2>Hello, <span id="welcomeId">Mentee Name</span></h2>
-
-    <div class="personalInfo">
-
-        <hr>
-        <h3>Personal Info:</h3>
-        <div class="myInfo">
-            <input id="firstName" type="text" placeholder="First Name (get from DB)"><br>
-            <input id="lastName" type="text" placeholder="Last Name (get from DB)"><br>
-            <input id="email" type="text" placeholder="Email (get from DB)"><br>
-            <input id="age" type="text" placeholder="Age (Optional)"><br>
-            <input id="preferenceName" type="text" placeholder="Preferred Name"><br>
-            <input id="degree" type="text" placeholder="Your Degree"><br>
-            <input id="college" type="text" placeholder="Graduate College/School"><br>
-            <input id="majors" type="text" placeholder="Your Major(s)"><br>
-            <input id="position" type="text" placeholder="Your Current Position"><br>
-
+                <div class="column right">
+                    <h2>Your match:</h2>
+                    <div class="card">
+                        <img src="./mentor_3.jfif" alt="headshot" style="width: 100%;">
+                        <h2 id="profileCardNameId">Mentor</h2>
+                        <p class="title">CEO & Founder</p>
+                        <p><button>Contact</button></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="pic">
-            <img id="myImg" alt="Your Headshot: Business Attire" src="#">
-            <br>
-            <input type="file" /><br>
-        </div>
-
-    </div>
-
-    <div class="questions">
-
-        <hr>
-
-        <div class="professionalGoal">
-
-            <h3>Professional Goals: </h3>
-
-            <label for="goalSelection">What Are Your Professional Goals?</label>
-            <br>
-            <select class="goalSelection">
-                <option disabled selected></option>
-                <option>Vertical Movement Within the Company</option>
-                <option>Financial Success (High Net Worth)</option>
-                <option>A Strong Network (Having Connections)</option>
-                <option>Know More About the World</option>
-            </select>
-
-        </div>
-
-        <div class="companyCulture">
-
-            <h3>Company Culture: </h3>
-
-            <label for="companyCultureSelection">What Do You Look For Most in the Company?</label>
-            <br>
-            <select class="companyCultureSelection">
-                <option disabled selected></option>
-                <option>Work/life balance</option>
-                <option>Collaborative work area</option>
-                <option>Closed work area (cubicles)</option>
-                <option>Movement within the company</option>
-                <option>Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
-                <option>Flexibility (work from home, PTO, etc.)</option>
-            </select>
-
-        </div>
-
-        <div class="mentorPreference">
-
-            <h3>Mentor Preference: </h3>
-
-            <label for="mentorPreferenceSelection">What Do You Look For Most in a Mentor?</label>
-            <br>
-            <select class="mentorPreferenceSelection">
-                <option disabled selected></option>
-                <option>Age similarity</option>
-                <option>Relevant industry expertise/experience</option>
-                <option>Same career trajectory (mentor in the same position as mentee last year)</option>
-                <option>Reliability (someone who replies quickly and is always there when needed)</option>
-                <option>Professional development assistance (someone to look over resume, cover letter, LinkedIn, etc...)</option>
-            </select>
-
-        </div>
-
-        <div class="mentorInvolvement">
-
-            <h3>Mentor Involvement: </h3>
-
-            <label for="mentorInvolvementSelection">How Involved Would You Like Your Mentor To Be?</label>
-            <br>
-            <select class="mentorInvolvementSelection">
-                <option disabled selected></option>
-                <option>Highly involved</option>
-                <option>Somewhat involved</option>
-                <option>Indifferent</option>
-                <option>Rarely involved</option>
-            </select>
-
-        </div>
 
     </div>
 
-    <div class="button">
-
-        <button type="button" onclick="save()"> Save </button><br />
-        <button type="submit" onclick="submit()">Submit</button>
-
-    </div>
-
-    <footer>
+    <!-- <footer>
 
         <div class="website">
             <ul>
@@ -136,26 +66,15 @@
             </ul>
         </div>
 
-    </footer>
+    </footer> -->
 
+    <script src="../app.js"></script>
     <script>
-
-        window.addEventListener('load', function() {
-            document.querySelector('input[type="file"]').addEventListener('change', function() {
-                if (this.files && this.files[0]) {
-                    var img = document.querySelector('img');  // $('img')[0]
-                    img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-                    img.onload = imageIsLoaded;
-                    }
-                });
-            });
-
-        function imageIsLoaded() { 
-            alert("The image is uploaded.");  // blob url
-            // update width and height ...
-        }
-
+        window.addEventListener('load', event => {
+            loadProfileData();
+        });
     </script>
 
 </body>
+
 </html>

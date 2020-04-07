@@ -80,7 +80,7 @@ body {
   display: 			block;
 }
 
-.skyblue {background-color: rgb(111, 191, 244);}
+.deepblue {background-color: #0D0221;}
 .yel {background-color: #ffff00;}
 .cya {background-color: #00ffff;}
 .lightcoral {background-color: lightcoral;}
@@ -89,11 +89,19 @@ body {
 .tea {background-color: #008080;}
 .wht {background-color: #ffffff;}
 
+.container {
+  margin: 0 5% 0 5%;
+}
+
+h1 {
+  margin: auto;
+}
 
 .heading {
     height: 15vh;
     font-size: 4.5vh;
     text-align: center;
+    display: flex;
 }
 
 .subheading {
@@ -256,7 +264,7 @@ body {
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
-    /* margin: auto; */
+    margin-top: 20px;
     text-align: center; 
 }
 
