@@ -185,6 +185,8 @@ namespace accountmanager
 			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
 			sqlDa.Fill(sqlDt);
 
+			// Need this query to be returned so it can be handled by Ajax, SOS
+
 			//return sqlDt.ToArray();
 		}
 

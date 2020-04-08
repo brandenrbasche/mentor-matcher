@@ -42,14 +42,16 @@ function registerMentee(responses) {
         "password": responses[4].value,
         "userType": 0
     };
+    console.log(menteeResponses);
 
     var matchingObj = {
         "userName": responses[0].value,
-        "q1": responses[6],
-        "q2": responses[7],
-        "q3": responses[8],
-        "q4": responses[9]
+        "q1": responses[6].value,
+        "q2": responses[7].value,
+        "q3": responses[8].value,
+        "q4": responses[9].value
     };
+    console.log(matchingObj);
 
     for (var i = 0; i < 4; i++) {
         let responseObj = {
