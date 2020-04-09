@@ -100,6 +100,7 @@
     <Content Include="Global.asax" />
     <Content Include="HTML\index.html" />
     <Content Include="HTML\loginPage.html" />
+    <Content Include="HTML\match.html" />
     <Content Include="HTML\mentee_register.html" />
     <Content Include="HTML\MentorProfile.html" />
     <Content Include="HTML\mentor_register.html" />
@@ -115,6 +116,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Matches.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

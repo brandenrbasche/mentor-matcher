@@ -164,9 +164,8 @@ function registerMentor(responses) {
             window.location.href = "index.html"
         }
     });
-
-    // Insert 
 }
+
 /* -----------------------------
     MENTEE/MENTOR LOGIN
 --------------------------------- */
@@ -275,8 +274,6 @@ function passUserName() {
     welcomeName.innerHTML = userLogin;
 }
 
-
-
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -331,4 +328,16 @@ function newElement() {
       div.style.display = "none";
     }
   }
+}
+
+/* -----------------------------
+    PIC YOUR MATCH PAGE
+--------------------------------- */
+function getMatchData() {
+    let user = 'brandennnnn';
+    $.ajax({
+        type: 'GET',
+        url: '../AccountServices.asmmx/GetMatches',
+        data: 
+    });
 }
