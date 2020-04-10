@@ -12,6 +12,39 @@
     <title>Pick Your Match</title>
 </head>
 <body>
+    <div class="row">
+        <div class="heading col-lg-12 col-md-12 skyblue">
+            <h1>Mentor Matcher</h1>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="emptySpace col-lg-03 col-md-02"></div>
+            <div class="subheading col-lg-06 col-md-08">
+                <h2><i>Welcome, <span id="welcomeNameId">Mentee</span></i></h2>
+            </div>
+            <div class="emptySpace col-lg-03 col-md-02"></div>
+        </div>
+
+        <div class="row" id="matchSelectionGridId">
+            <ul class="mentorList">
+                <li class="mentorListItem" id="mentorListItemId">
+                    <h4>Match 1: <span id="matchNameId">Mentor Name</span></h4>
+                    <a href="#" id="matchEmailId">email@email.com</a>
+                    <p>Compatibility: <span id="commonalityPercentageId">100%</span></p>
+                    <button class="selectBtn" id="mentorMatchButtonId">Select This Mentor</button>
+                </li>
+                <hr class="matchSeparatingRule">
+                <li class="mentorListItem" id="mentorListItemId">
+                    <h4>Match 2: <span id="matchNameId">Mentor Name</span></h4>
+                    <a href="#" id="matchEmailId">email@email.com</a>
+                    <p>Compatibility: <span id="commonalityPercentageId">75%</span></p>
+                    <button class="selectBtn" id="mentorMatchButtonId">Select This Mentor</button>
+                </li>
+                <hr class="matchSeparatingRule">
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>

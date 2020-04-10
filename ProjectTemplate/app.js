@@ -333,11 +333,11 @@ function newElement() {
 /* -----------------------------
     PIC YOUR MATCH PAGE
 --------------------------------- */
-function getMatchData() {
-    let user = 'brandennnnn';
-    $.ajax({
-        type: 'GET',
-        url: '../AccountServices.asmmx/GetMatches',
-        data: 
-    });
-}
+//function getMatchData() {
+//    let user = 'brandennnnn';
+//    $.ajax({
+//        type: 'GET',
+//        url: '../AccountServices.asmmx/GetMatches',
+//        data: 
+//    });
+//}

@@ -163,22 +163,22 @@ namespace accountmanager
 		}
 
 		[WebMethod]
-		//public void GetMatches(string userName)
 		public string GetMatches(string userName)
 		{
 			//DataTable sqlDt = new DataTable("matches");
 			Matches[] allRecords = null;
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-			string sqlSelect = "select @userNameValue as 'Mentee', ru.userName as 'Mentor', eu.email as 'Mentee Email', ru.email as 'Mentor Email',count(*) as Commonality " +
+			string sqlSelect = "select eu.userName as 'Mentee', ru.userName as 'Mentor', eu.email as 'Mentee Email', ru.email as 'Mentor Email',count(*) as Commonality " +
 							   "from user_table eu " +
-							   "join user_responses_table eus on @userNameValue = eus.userName " +
+							   "join user_responses_table eus on eu.userName = eus.userName " +
 							   "join responses_table es on eus.responseId = es.responseId " +
 							   "join user_responses_table rus on eus.responseId = rus.responseId " +
 							   "join user_table ru on rus.userName = ru.userName " +
-							   "where eu.userType = 1 " +
-								"and @userNameValue != ru.userName " +
-								"group by @userNameValue, ru.userName " +
-								"order by @userNameValue, ru.userName; ";
+							   "where eu.userType = 0 " +
+								"and eu.userName != ru.userName " +
+								"and eu.userName = @userNameValue " +
+								"group by eu.userName, ru.userName " +
+								"order by eu.userName, ru.userName; ";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
@@ -206,56 +206,6 @@ namespace accountmanager
 
 			return jsonText;
 		}
-
-		//[WebMethod]
-		//public Matches[] GetMatches(string mentee)
-		//{
-		//	//ClassName[] allRecords = null;
-		//	//string sql = @"SELECT col1,col2
-		//	//            FROM  some table";
-		//	//using (var command = new SqlCommand(sql, con))
-		//	//{
-		//	//	con.Open();
-		//	//	using (var reader = command.ExecuteReader())
-		//	//	{
-		//	//		var list = new List<ClassName>();
-		//	//		while (reader.Read())
-		//	//			list.Add(new ClassName { Col1 = reader.GetString(0), Col2 = reader.GetInt32(1) });
-		//	//		allRecords = list.ToArray();
-		//	//	}
-		//	//}
-
-		//	string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-		//	MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
-		//	Matches[] allRecords = null;
-		//	string sqlSelect = "select @userNameValue as 'Mentee', ru.userName as 'Mentor', eu.email as 'Mentee Email', ru.email as 'Mentor Email',count(*) as Commonality " +
-		//		   "from user_table eu " +
-		//		   "join user_responses_table eus on @userNameValue = eus.userName " +
-		//		   "join responses_table es on eus.responseId = es.responseId " +
-		//		   "join user_responses_table rus on eus.responseId = rus.responseId " +
-		//		   "join user_table ru on rus.userName = ru.userName " +
-		//		   "where eu.userType = 1 " +
-		//				"and @userNameValue != ru.userName " +
-		//				"group by @userNameValue, ru.userName " +
-		//				"order by @userNameValue, ru.userName; ";
-
-		//	using (var command = new MySqlCommand(sqlSelect, sqlConnection))
-		//	{
-		//		command.Open();
-		//		using(var reader = command.ExecuteReader())
-		//		{
-		//			while (reader.Read())
-		//				allRecords.Add(new Matches
-		//				{
-		//					mentee = reader.GetString(0),
-		//					mentor = reader.GetString(1),
-		//					menteeEmail = reader.GetString(2),
-		//					mentorEmail = reader.GetString(3),
-		//					commonality = Convert.ToInt32(reader.GetString(4))
-		//				});
-		//		}
-		//	}
-		//}
 
 		//EXAMPLE OF A SELECT, AND RETURNING "COMPLEX" DATA TYPES
 		[WebMethod(EnableSession = true)]
