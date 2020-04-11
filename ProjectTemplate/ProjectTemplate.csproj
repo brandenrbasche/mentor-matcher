@@ -98,6 +98,7 @@
     <Content Include="CSS\profile-avatar.jpg" />
     <Content Include="CSS\profileStyles.css" />
     <Content Include="Global.asax" />
+    <Content Include="HTML\emailPage.html" />
     <Content Include="HTML\index.html" />
     <Content Include="HTML\loginPage.html" />
     <Content Include="HTML\match.html" />

@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Send Anonymous Email</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Mentor Matcher</h1>
+    <form onsubmit="getAnon()">
+        <label for="send" id="send">Send To:</label>
+        <input type="text" id="sendTo" name="sendTo" disabled><br><br>
+        <label for="recipient" id="recipient"></label>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject"><br><br>
+        <label for="body">Body:</label>
+        <textarea id="body" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Send Email">
+    </form>
+    <script src="../app.js"></script>
+
+</body>
+</html>

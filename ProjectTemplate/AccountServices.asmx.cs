@@ -8,6 +8,8 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Net;
+using System.Net.Mail;
 
 namespace accountmanager
 {
@@ -338,9 +340,43 @@ namespace accountmanager
 				sqlConnection.Close();
 			}
 		}
+        [WebMethod(EnableSession = true)]
+        public bool AnonEmail(string subject, string body, string recipient)
+        {
+            //DataTable sqlDt = new DataTable("Accounts");
+            //string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+            //string sqlSelect = "select userName, email, from user_table where userName=@idValue order by userName";
+            //MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+            //MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+            ////gonna use this to fill a data table
+            //sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(userName));
+            //MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+            ////filling the data table
+            //sqlDa.Fill(sqlDt);
 
-		//EXAMPLE OF A DELETE QUERY
-		[WebMethod(EnableSession = true)]
+            bool trueFalse = false;
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.EnableSsl = true;
+
+            //smtpClient.Timeout = 10000;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new System.Net.NetworkCredential("menteeanonymous@gmail.com", "MentorMatcher1!");
+
+            MailMessage mailMsg = new MailMessage();
+            mailMsg.From = new MailAddress("menteeanonymous@gmail.com");
+            mailMsg.To.Add(recipient);
+            //mailMsg.CC.Add("cc@ccServer.com");
+            //mailMsg.Bcc.Add("bcc@bccServer.com");
+            mailMsg.Subject = subject;
+            mailMsg.Body = body;
+            smtpClient.Send(mailMsg);
+            trueFalse = true;
+            return trueFalse;
+            //Console.WriteLine("Mail sent");
+        }
+        //EXAMPLE OF A DELETE QUERY
+        [WebMethod(EnableSession = true)]
 		public void RejectAccount(string user_ID)
 		{
 			if (Convert.ToInt32(Session["AdminStatus"]) == 1)

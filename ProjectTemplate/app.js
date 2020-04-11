@@ -227,12 +227,12 @@ function logOn() {
                                     console.log(mentStatus);
                                     if (mentStatus == 1) {
                                         window.location.href = "MentorProfile.html"
-                                        document.getElementById("welcomeNameId").innerHTML = firstName;
+                                        //document.getElementById("welcomeNameId").innerHTML = firstName;
                                         console.log(mentStatus);
                                     }
                                     else {
                                         window.location.href = "MenteeProfile.html"
-                                        document.getElementById("welcomeId").innerHTML = firstName;
+                                        //document.getElementById("welcomeId").innerHTML = firstName;
                                     }
                                 }
                                 console.log(yam[1]);
@@ -263,7 +263,53 @@ function logOn() {
     });
 
 }
+/* -----------------------------
+    ANONYMOUS EMAIL
+--------------------------------- */
+function anonEmail() {
+    let userName = localStorage.getItem('userName');
+    console.log(localStorage.getItem('userName'));
+    
+    getData = { "userName": userName };
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/GetMatches",
+        data: JSON.stringify(getData),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+            window.location.href = "emailPage.html"
+           
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+function getAnon() {
+    let subject = document.getElementById("subject").value;
+    let body = document.getElementById("body").value;
+    let recipient = "jacobnorwood10@gmail.com";
+    console.log("You got here bro");
+    emailInfo = {
 
+        "subject": subject,
+        "body": body,
+        "recipient": recipient
+    }
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/AnonEmail",
+        data: JSON.stringify(emailInfo),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+            console.log("Hey nice bro");
+        }
+    });
+}
 /* -----------------------------
     MENTEE / MENTOR PROFILE
 --------------------------------- */
