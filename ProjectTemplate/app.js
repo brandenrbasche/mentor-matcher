@@ -398,6 +398,8 @@ function newElement() {
 --------------------------------- */
 function getMatchData(arr) {
     console.log(arr);
+    let welcomeName = document.getElementById('welcomeNameId');
+    welcomeName.innerHTML = arr[0].mentee;
     let ul = document.querySelector('ul');
     var matchNumber = 0;
     for (var i = 0; i < arr.length; i++) {
