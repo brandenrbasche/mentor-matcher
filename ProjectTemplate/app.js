@@ -33,7 +33,7 @@ function formValidation(form) {
     MENTEE REGISTRATION
 --------------------------------- */
 function registerMentee(responses) {
-    // var menteeResponses = [responses[0].value, responses[1].value, responses[2].value, responses[3].value, responses[4].value, 0];
+    let userName = responses[0].value;
     var menteeResponses = {
         "userName": responses[0].value,
         "fName": responses[1].value,
@@ -97,6 +97,23 @@ function registerMentee(responses) {
             //window.location.href = "index.html"
         }
     });
+
+    // MATCHING ELAGANZA EXTRAVAGANZA!
+    // when the user registers, their username is processed to call GetMatches, then they are redirected to match.html
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/GetMatches",
+        data: JSON.stringify({ "userName": userName }),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'text',
+        success: function (data) {
+            localStorage.setItem('matches', data);
+            console.log("GetMatches method called!");
+            window.location = 'match.html';
+        }
+    });
+
+
 }
 
 /* -----------------------------
@@ -331,13 +348,54 @@ function newElement() {
 }
 
 /* -----------------------------
-    PIC YOUR MATCH PAGE
+    PICK YOUR MATCH!
 --------------------------------- */
-//function getMatchData() {
-//    let user = 'brandennnnn';
-//    $.ajax({
-//        type: 'GET',
-//        url: '../AccountServices.asmmx/GetMatches',
-//        data: 
-//    });
-//}
+function getMatchData(arr) {
+    console.log(arr);
+    let ul = document.querySelector('ul');
+    var matchNumber = 0;
+    for (var i = 0; i < arr.length; i++) {
+        matchNumber += 1;
+        var mentorName = arr[i].mentor;
+        var mentorEmail = arr[i].mentorEmail;
+        var commonality = arr[i].commonality;
+        createList(matchNumber, mentorName, mentorEmail, commonality);
+    }
+
+}
+
+function createList(matchNumber, matchName, matchEmail, commonality) {
+    let matchString = "Match " + matchNumber + ": " + matchName;
+    let h4 = document.createElement('h4');
+    h4.innerHTML = matchString;
+
+    //let a = document.createElement('a');
+    //a.innerHTML = matchEmail;
+    //let mailTo = "mailto: " + matchEmail;
+    //a.setAttribute('href', mailTo);
+
+    let p = document.createElement('p');
+    p.innerHTML = "Commonality: " + calcCommonality(commonality);
+
+    let btn = document.createElement('button');
+    btn.innerHTML = "Select This Mentor";
+    //btn.onclick = "selectMentor()";
+    btn.setAttribute("onclick", "selectMentor()");
+
+    let hr = document.createElement('hr');
+
+    document.body.appendChild(h4);
+    //document.body.appendChild(a);
+    document.body.appendChild(p);
+    document.body.appendChild(btn);
+    document.body.appendChild(hr);
+}
+
+function calcCommonality(commonality) {
+    var percent = ((commonality / 4) * 100) + "%";
+    return percent;
+}
+
+function selectMentor() {
+    console.log("Mentor selected!");
+}

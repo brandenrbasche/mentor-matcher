@@ -6,7 +6,15 @@
     <script src="../app.js"></script>
     <script>
         window.addEventListener('load', event => {
+            // not the most efficient way to go about this but it works! lmao
+            let matches = localStorage.getItem('matches').slice(6, -2);
+            let pattern1 = /(\\r)(\\n)/g;
+            let pattern2 = /\\/g;
+            let clean1 = matches.replace(pattern1, "");
+            let cleanMatches = JSON.parse(clean1.replace(pattern2, ""));
 
+            // CALL FUNCTION TO POPULATE MATCHES HERE
+            getMatchData(cleanMatches);
         });
     </script>
     <title>Pick Your Match</title>
@@ -27,24 +35,25 @@
         </div>
 
         <div class="row" id="matchSelectionGridId">
-            <ul class="mentorList">
-                <li class="mentorListItem" id="mentorListItemId">
-                    <h4>Match 1: <span id="matchNameId">Mentor Name</span></h4>
+            <ul class="mentorList" id="mentorListId">
+                <!--<li class="mentorListItem" id="mentorListItemId">
+                    <h4>Match <span id="matchNumberId"></span>: <span id="matchNameId">Mentor Name</span></h4>
                     <a href="#" id="matchEmailId">email@email.com</a>
                     <p>Compatibility: <span id="commonalityPercentageId">100%</span></p>
                     <button class="selectBtn" id="mentorMatchButtonId">Select This Mentor</button>
-                </li>
+                </li>-->
                 <hr class="matchSeparatingRule">
-                <li class="mentorListItem" id="mentorListItemId">
+                <!-- <li class="mentorListItem" id="mentorListItemId">
                     <h4>Match 2: <span id="matchNameId">Mentor Name</span></h4>
                     <a href="#" id="matchEmailId">email@email.com</a>
                     <p>Compatibility: <span id="commonalityPercentageId">75%</span></p>
                     <button class="selectBtn" id="mentorMatchButtonId">Select This Mentor</button>
                 </li>
-                <hr class="matchSeparatingRule">
+                <hr class="matchSeparatingRule"> -->
             </ul>
         </div>
     </div>
 
+    <script src="../app.js"></script>
 </body>
 </html>
