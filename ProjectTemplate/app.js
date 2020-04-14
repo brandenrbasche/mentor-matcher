@@ -412,6 +412,9 @@ function getMatchData(arr) {
 
 }
 
+// create account array here
+var myArr = [];
+
 function createList(matchNumber, matchName, matchEmail, commonality) {
     let matchString = "Match " + matchNumber + ": " + matchName;
     let h4 = document.createElement('h4');
@@ -426,9 +429,13 @@ function createList(matchNumber, matchName, matchEmail, commonality) {
     p.innerHTML = "Commonality: " + calcCommonality(commonality);
 
     let btn = document.createElement('button');
+    let btnId = matchName + "Id";
     btn.innerHTML = "Select This Mentor";
     //btn.onclick = "selectMentor()";
-    btn.setAttribute("onclick", "selectMentor()");
+    //btn.setAttribute("id", btnId);
+    btn.setAttribute("id", matchName);
+    btn.setAttribute("onclick", "selectMentor(this.id)");
+    //btn.setAttribute("onclick", "selectMentor(matchName, matchEmail, commonality)");
 
     let hr = document.createElement('hr');
 
@@ -444,6 +451,16 @@ function calcCommonality(commonality) {
     return percent;
 }
 
-function selectMentor() {
-    console.log("Mentor selected!");
+//function selectMentor(matchName, matchEmail, commonality) {
+//    let matchObj = {
+//        "matchName": matchName,
+//        "matchEmail": matchEmail,
+//        "commonality": commmonality
+//    };
+
+//    console.log(matchObj);
+//}
+
+function selectMentor(btnId) {
+    console.log(btnId + " selected!");
 }

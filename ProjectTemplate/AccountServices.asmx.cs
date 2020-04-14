@@ -490,5 +490,29 @@ namespace accountmanager
 			sqlConnection.Close();
 
 		}
+
+		[WebMethod(true)]
+		public void InsertGoals(string userName, string myGoal, int goalStatus)
+		{
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "INSERT INTO goals (userName, myGoal, goalStatus) VALUES (@userNameValue, @myGoalValue, @goalStatusValue);";
+
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@myGoalValue", myGoal);
+			sqlCommand.Parameters.AddWithValue("@goalStatusValue", goalStatus);
+
+			sqlConnection.Open();
+			try
+			{
+				sqlCommand.ExecuteNonQuery();
+			}
+			catch(Exception e)
+			{
+				sqlConnection.Close();
+			}
+		}
 	}
 }
