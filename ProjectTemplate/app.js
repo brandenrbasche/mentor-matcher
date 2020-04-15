@@ -451,16 +451,70 @@ function calcCommonality(commonality) {
     return percent;
 }
 
-//function selectMentor(matchName, matchEmail, commonality) {
-//    let matchObj = {
-//        "matchName": matchName,
-//        "matchEmail": matchEmail,
-//        "commonality": commmonality
-//    };
-
-//    console.log(matchObj);
-//}
+//$.ajax({
+//    type: 'POST',
+//    url: "../AccountServices.asmx/AnonEmail",
+//    data: JSON.stringify(emailInfo),
+//    contentType: "application/json; charset=utf-8",
+//    dataType: 'json',
+//    success: function (res) {
+//        console.log(res);
+//        console.log("Hey nice bro");
+//    }
+//});
 
 function selectMentor(btnId) {
     console.log(btnId + " selected!");
+    let match = JSON.parse(localStorage.getItem("cleanMatches"));
+
+    for (var i = 0; i < match.length; i++) {
+        try {
+            if (btnId == match[i].mentor) {
+                matchMentee(match[i].mentee, match[i].mentor); // assigns matches in user_table!
+            }
+        } catch (err) {
+            alert("Match unsuccesful! Error: \n" + err);
+        }
+        break;
+    }
+
+    window.location = "mentee_profile.html";
+}
+
+function matchMentee(userName, match) {
+    let obj = {
+        "userName": userName,
+        "match": match
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/UpdateMenteeMatch",
+        data: JSON.stringify(obj),
+        contentType: 'application/json; charset=utf-8;',
+        dataType: 'json',
+        success: function () {
+            console.log('Sucesfully matched mentee with ' + match + "!");
+            matchMentor(match, userName);
+        }
+    });
+}
+
+function matchMentor(match, userName) {
+    let obj = {
+        "match": match,
+        "userName": userName
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/UpdateMenteeMatch",
+        data: JSON.stringify(obj),
+        contentType: 'application/json; charset=utf-8;',
+        dataType: 'json',
+        success: function () {
+            console.log('Sucesfully matched mentee with ' + match + "!");
+            matchMentor(match, userName);
+        }
+    });
 }

@@ -176,7 +176,7 @@ namespace accountmanager
 							   "join responses_table es on eus.responseId = es.responseId " +
 							   "join user_responses_table rus on eus.responseId = rus.responseId " +
 							   "join user_table ru on rus.userName = ru.userName " +
-							   "where eu.userType = 0 " +
+							   "where eu.userType = 1 " +
 								"and eu.userName != ru.userName " +
 								"and eu.userName = @userNameValue " +
 								"group by eu.userName, ru.userName " +
@@ -510,6 +510,52 @@ namespace accountmanager
 				sqlCommand.ExecuteNonQuery();
 			}
 			catch(Exception e)
+			{
+				sqlConnection.Close();
+			}
+		}
+
+		[WebMethod(true)]
+		public void UpdateMenteeMatch(string userName, string match)
+		{
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "UPDATE user_table SET user_table.match = @matchValue WHERE userName = @userNameValue";
+
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
+			sqlCommand.Parameters.AddWithValue("@matchValue", match);
+
+			sqlConnection.Open();
+			try
+			{
+				sqlCommand.ExecuteNonQuery();
+			}
+			catch (Exception e)
+			{
+				sqlConnection.Close();
+			}
+		}
+
+		[WebMethod(true)]
+		public void UpdateMentorMatch(string match, string userName)
+		{
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "UPDATE user_table SET user_table.match = @matchValue WHERE userName = @userNameValue";
+
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@userNameValue", match);
+			sqlCommand.Parameters.AddWithValue("@matchValue", userName);
+
+			sqlConnection.Open();
+			try
+			{
+				sqlCommand.ExecuteNonQuery();
+			}
+			catch (Exception e)
 			{
 				sqlConnection.Close();
 			}
