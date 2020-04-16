@@ -337,6 +337,10 @@ function passUserName() {
     welcomeName.innerHTML = userLogin;
 }
 
+function passMentorInfo() {
+
+}
+
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -388,6 +392,7 @@ function newElement() {
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
+      div.style.display = "none";
       div.style.display = "none";
     }
   }
@@ -470,6 +475,7 @@ function selectMentor(btnId) {
     for (var i = 0; i < match.length; i++) {
         try {
             if (btnId == match[i].mentor) {
+                localStorage.setItem('matchInfo', match[i]);
                 matchMentee(match[i].mentee, match[i].mentor); // assigns matches in user_table!
             }
         } catch (err) {

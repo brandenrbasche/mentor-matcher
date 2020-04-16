@@ -5,34 +5,39 @@
     <title>Mentor Matcher</title>
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Marcellus+SC|Merienda+One|Rufina&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/generalStyling.css">
     <script src="../app.js"></script>
 </head>
 <body>
 
     <div class="heading">
-        <h1>Mentor Matcher</h1>
+        <!-- <h1>Mentor Matcher</h1> -->
+        <!-- <h6>MENTOR MATCHER</h6> -->
+        <img src="../imgs/mentor.png" alt="mentor-logo" class="logo">
     </div>
 
-    <h2>Welcome!</h2>
-    <hr />
+    <!-- <h2>Welcome!</h2>
+    <hr /> -->
 
     <div class="loginForm">
         <h3>Sign In</h3>
 
         <form id="loginFormId">
-            <input id="userName" placeholder="Username" type="text" /><br />
-            <input id="password" placeholder="Password" type="password" /><br />
-            <button type="button" onclick="logOn()">Log In</button>
+            <input id="userName" placeholder="Username" type="text" class="form-control"/>
+            <input id="password" placeholder="Password" type="password" class="form-control"/><br>
+            <button type="button" class="btn btn-lg btn-primary btn-block" onclick="logOn()">Log In</button>
         </form>
     </div>
-
-    <br />
-
+    <br>
+    
     <div class="register">
-        <h3>New here? Sign up now:</h3>
-        <button type="button" onclick="location.href='mentee_register.html'">I'm a Mentee</button>
-        <button type="button" onclick="location.href='mentor_register.html'">I'm a Mentor</button>
+        <p>New here?</p>
+        <div class="registerBtns">
+            <button type="button" onclick="location.href='mentee_register.html'" class="btn btn-light registerBtn">I'm a Mentee</button>
+        <button type="button" onclick="location.href='mentor_register.html'" class="btn btn-light registerBtn">I'm a Mentor</button>
+        </div>
     </div>
     
 </body>

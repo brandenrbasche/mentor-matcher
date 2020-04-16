@@ -1,4 +1,85 @@
-﻿* {
+﻿html, body {
+    height: 100%;
+    margin-top: 30px;
+}
+
+body {
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ecf0f1;
+    font-family: 'Overpass', sans-serif;
+}
+
+.heading {
+    margin-bottom: 20px;
+}
+
+.heading h6 {
+    text-align: center;
+    /* font-weight: 900; */
+}
+
+.logo {
+    width: auto;
+    height: 150px;
+    display: flex;
+    margin: auto;
+}
+
+h3 {
+    text-align: center;
+}
+
+.loginForm {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;   
+}
+
+.loginForm h3 {
+    /* font-weight: 100; */
+}
+
+#userName {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#password {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+hr {
+    width: 50%;
+}
+
+.register p {
+    text-align: center;
+    margin-bottom: 10px;
+    /* font-weight: 100; */
+}
+
+.registerBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.registerBtn {
+    margin: 0 5px 0 5px;
+    justify-content: center;
+}
+
+/* * {
     box-sizing: border-box;
     margin: 0;
 }
@@ -10,7 +91,7 @@ body {
 
 /*div {border: dashed;} */
 
-.personalInfo, .questions, h2 {
+/* .personalInfo, .questions, h2 {
     margin-left: 200px;
     margin-right: 200px;
 }
@@ -88,4 +169,4 @@ footer {
 
 ul {
     margin-left: 180px;
-}
+} */ 
