@@ -1,0 +1,41 @@
+html, body {
+    height: 100%;
+    margin-top: 30px;
+}
+
+* {    
+    font-family: 'Overpass', sans-serif;
+    box-sizing: border-box;}
+
+body {
+    /* display: flexbox; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding-bottom: 40px;
+    background-color: #ecf0f1;
+}
+
+.heading {
+    text-align: center;
+}
+
+label {
+    /* padding-right: 5%; */
+    /* background-color: palevioletred; */
+    font-size: 3vh;
+    float: left;
+    clear: both;
+}
+
+input {
+    /* padding-right: 0;
+    padding-left: 2%; */
+    float: right;
+    width: 25vw;
+    /* display: inline-block; */
+}
+
+select {
+    width: 45vw;
+    font-size: 3vh;
+}
