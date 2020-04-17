@@ -40,9 +40,9 @@ h3 {
     margin: 0 auto;   
 }
 
-.loginForm h3 {
-    /* font-weight: 100; */
-}
+/* .loginForm h3 {
+    font-weight: 100;
+} */
 
 #userName {
     margin-bottom: -1px;
