@@ -107,6 +107,7 @@ function registerMentee(responses) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'text',
         success: function (data) {
+            console.log(data);
             localStorage.setItem('matches', data);
             console.log("GetMatches method called!");
             window.location = 'match.html';
@@ -373,15 +374,15 @@ list.addEventListener('click', function(ev) {
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
+  var inputValue = document.getElementById("goalInput").value;
   var t = document.createTextNode(inputValue);
   li.appendChild(t);
   if (inputValue === '') {
     alert("You must write something!");
   } else {
-    document.getElementById("myUL").appendChild(li);
+    document.getElementById("goalUl").appendChild(li);
   }
-  document.getElementById("myInput").value = "";
+  document.getElementById("goalInput").value = "";
 
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -412,7 +413,7 @@ function getMatchData(arr) {
         var mentorName = arr[i].mentor;
         var mentorEmail = arr[i].mentorEmail;
         var commonality = arr[i].commonality;
-        createList(matchNumber, mentorName, mentorEmail, commonality);
+        createList(matchNumber, mentorName, commonality);
     }
 
 }
@@ -420,74 +421,57 @@ function getMatchData(arr) {
 // create account array here
 var myArr = [];
 
-function createList(matchNumber, matchName, matchEmail, commonality) {
+function createList(matchNumber, matchName, commonality) {
     let matchString = "Match " + matchNumber + ": " + matchName;
     let h4 = document.createElement('h4');
     h4.innerHTML = matchString;
-
-    //let a = document.createElement('a');
-    //a.innerHTML = matchEmail;
-    //let mailTo = "mailto: " + matchEmail;
-    //a.setAttribute('href', mailTo);
 
     let p = document.createElement('p');
     p.innerHTML = "Commonality: " + calcCommonality(commonality);
 
     let btn = document.createElement('button');
-    let btnId = matchName + "Id";
+    let btnId = matchName;
     btn.innerHTML = "Select This Mentor";
-    //btn.onclick = "selectMentor()";
-    //btn.setAttribute("id", btnId);
     btn.setAttribute("id", matchName);
     btn.setAttribute("onclick", "selectMentor(this.id)");
-    //btn.setAttribute("onclick", "selectMentor(matchName, matchEmail, commonality)");
 
     let hr = document.createElement('hr');
 
     document.body.appendChild(h4);
-    //document.body.appendChild(a);
     document.body.appendChild(p);
     document.body.appendChild(btn);
     document.body.appendChild(hr);
 }
 
 function calcCommonality(commonality) {
-    var percent = ((commonality / 4) * 100) + "%";
-    return percent;
+    return ((commonality / 4) * 100) + "%";
 }
 
-//$.ajax({
-//    type: 'POST',
-//    url: "../AccountServices.asmx/AnonEmail",
-//    data: JSON.stringify(emailInfo),
-//    contentType: "application/json; charset=utf-8",
-//    dataType: 'json',
-//    success: function (res) {
-//        console.log(res);
-//        console.log("Hey nice bro");
-//    }
-//});
-
 function selectMentor(btnId) {
-    console.log(btnId + " selected!");
+    console.log(btnId);
     let match = JSON.parse(localStorage.getItem("cleanMatches"));
-
     for (var i = 0; i < match.length; i++) {
-        try {
-            if (btnId == match[i].mentor) {
+        //if (btnId.toString() === match[i].mentor.toString()) {
+        //    console.log('if condition working');
+        //    localStorage.setItem('matchInfo', match[i]);
+        //    matchMentee(match[i].mentee, match[i].mentor);
+        //    //window.location = "MenteeProfile.html";
+        //} else {
+        //    console.log('not working');
+        //}
+        switch (btnId.toString()) {
+            case match[i].mentor.toString():
+                console.log('switch working');
                 localStorage.setItem('matchInfo', match[i]);
-                matchMentee(match[i].mentee, match[i].mentor); // assigns matches in user_table!
-            }
-        } catch (err) {
-            alert("Match unsuccesful! Error: \n" + err);
+                matchMentee(match[i].mentee, match[i].mentor);
+                break;
         }
-        break;
+        //break;
     }
-
-    window.location = "mentee_profile.html";
 }
 
 function matchMentee(userName, match) {
+    console.log('matchMentee function ran!');
     let obj = {
         "userName": userName,
         "match": match
@@ -500,13 +484,18 @@ function matchMentee(userName, match) {
         contentType: 'application/json; charset=utf-8;',
         dataType: 'json',
         success: function () {
-            console.log('Sucesfully matched mentee with ' + match + "!");
+            //console.log('Sucesfully matched mentee with ' + match + "!");
+            console.log("Succesfully called UpdateMenteeMatch method");
             matchMentor(match, userName);
+        },
+        error: function () {
+            console.log("UpdateMenteeMatch method not called");
         }
     });
 }
 
 function matchMentor(match, userName) {
+    console.log('matchMentor function ran!');
     let obj = {
         "match": match,
         "userName": userName
@@ -514,13 +503,18 @@ function matchMentor(match, userName) {
 
     $.ajax({
         type: 'POST',
-        url: "../AccountServices.asmx/UpdateMenteeMatch",
+        url: "../AccountServices.asmx/UpdateMentorMatch",
         data: JSON.stringify(obj),
         contentType: 'application/json; charset=utf-8;',
         dataType: 'json',
         success: function () {
-            console.log('Sucesfully matched mentee with ' + match + "!");
+            //console.log('Sucesfully matched mentee with ' + match + "!");
+            console.log("Sucessfully called UpdateMentorMatch method");
             matchMentor(match, userName);
+            window.location = "MenteeProfile.html";
+        },
+        error: function () {
+            console.log("UpdateMentorMatch method not called");
         }
     });
 }

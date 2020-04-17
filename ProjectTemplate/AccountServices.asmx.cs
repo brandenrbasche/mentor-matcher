@@ -176,9 +176,11 @@ namespace accountmanager
 							   "join responses_table es on eus.responseId = es.responseId " +
 							   "join user_responses_table rus on eus.responseId = rus.responseId " +
 							   "join user_table ru on rus.userName = ru.userName " +
-							   "where eu.userType = 1 " +
+							   "where eu.userType = 0 " +
 								"and eu.userName != ru.userName " +
 								"and eu.userName = @userNameValue " +
+								"and eu.match is null " +
+								"and ru.userType != 1 " +
 								"group by eu.userName, ru.userName " +
 								"order by eu.userName, ru.userName; ";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);

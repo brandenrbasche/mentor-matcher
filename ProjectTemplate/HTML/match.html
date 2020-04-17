@@ -13,7 +13,6 @@
             let clean1 = matches.replace(pattern1, "");
             let cleanMatches = JSON.parse(clean1.replace(pattern2, ""));
             localStorage.setItem("cleanMatches", JSON.stringify(cleanMatches));
-            // CALL FUNCTION TO POPULATE MATCHES HERE
             getMatchData(cleanMatches);
         });
     </script>
