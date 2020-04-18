@@ -10,15 +10,19 @@ function formValidation(form) {
                 alert("Cannot leave fields blank.");
                 break;
             }
-
+            
             if (!form[3].checkValidity()) {
                 alert("Please enter a correct email.");
                 break;
             }
         }
     }
-    if (responses[4].value != responses[5].value) {
+    else if (responses[4].value != responses[5].value) {
         alert("Passwords must match.");
+    }
+    else {
+        window.location.href = "index.html";
+        alert("Success! You have successfully registered an account! Please log in.")
     }
 
     if (window.location.href.includes("mentee_register.html")) {
