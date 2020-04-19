@@ -20,10 +20,10 @@ function formValidation(form) {
     else if (responses[4].value != responses[5].value) {
         alert("Passwords must match.");
     }
-    else {
-        window.location.href = "index.html";
-        alert("Success! You have successfully registered an account! Please log in.")
-    }
+    //else {
+    //    window.location.href = "index.html";
+    //    alert("Success! You have successfully registered an account! Please log in.")
+    //}
 
     if (window.location.href.includes("mentee_register.html")) {
         registerMentee(responses);
@@ -368,11 +368,11 @@ for (i = 0; i < close.length; i++) {
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
+//list.addEventListener('click', function (ev) {
+//  if (ev.target.tagName === 'LI') {
+//    ev.target.classList.toggle('checked');
+//  }
+//}, false);
 
 // Create a new list item when clicking on the "Add" button
 function newElement() {
@@ -515,7 +515,7 @@ function matchMentor(match, userName) {
             //console.log('Sucesfully matched mentee with ' + match + "!");
             console.log("Sucessfully called UpdateMentorMatch method");
             matchMentor(match, userName);
-            window.location = "MenteeProfile.html";
+            window.location = "index.html";
         },
         error: function () {
             console.log("UpdateMentorMatch method not called");
