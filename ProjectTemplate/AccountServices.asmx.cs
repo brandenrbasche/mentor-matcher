@@ -413,7 +413,7 @@ namespace accountmanager
 			//LOGIC: get all the active accounts and return them!
 			DataTable sqlDt = new DataTable("Accounts");
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-			string sqlSelect = "select userName, fName, lName, email, password, userType from user_table where userName=@idValue order by userName";
+			string sqlSelect = "select * FROM user_table where userName = @idValue order by userName";
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
             //gonna use this to fill a data table
@@ -434,15 +434,16 @@ namespace accountmanager
 					lName = sqlDt.Rows[i]["lName"].ToString(),
 					email = sqlDt.Rows[i]["email"].ToString(),
 					password = sqlDt.Rows[i]["password"].ToString(),
-					userType = Convert.ToInt32(sqlDt.Rows[i]["userType"])
+					userType = Convert.ToInt32(sqlDt.Rows[i]["userType"]),
+					match = sqlDt.Rows[i]["match"].ToString()
 				});
 			}
-            //convert the list of accounts to an array and return!
-            //return User_Accounts.ToArray();
-            //System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
-            //this.Context.Response.ContentType = "application/json; charset=utf-8";
-            //this.Context.Response.Write(jss.Serialize(Accounts.ToArray()));
-            return Accounts.ToArray();
+			//convert the list of accounts to an array and return!
+			//System.Web.Script.Serialization.JavaScriptSerializer jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+			//this.Context.Response.ContentType = "application/json; charset=utf-8";
+			//this.Context.Response.Write(jss.Serialize(Accounts.ToArray()));
+
+			return Accounts.ToArray();
 		}
     
 
@@ -562,5 +563,6 @@ namespace accountmanager
 				sqlConnection.Close();
 			}
 		}
+
 	}
 }

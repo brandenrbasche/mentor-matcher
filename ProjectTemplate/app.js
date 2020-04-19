@@ -332,7 +332,6 @@ function getAnon() {
     MENTEE / MENTOR PROFILE
 --------------------------------- */
 function passUserName() {
-    console.log(localStorage.getItem('userName'));
     let welcomeName = document.getElementById('welcomeNameId');
     let userLogin = localStorage.getItem('userName');
     welcomeName.innerHTML = userLogin;
@@ -404,8 +403,9 @@ function newElement() {
 --------------------------------- */
 function getMatchData(arr) {
     console.log(arr);
-    let welcomeName = document.getElementById('welcomeNameId');
-    welcomeName.innerHTML = arr[0].mentee;
+    populateWelcomeName(arr);
+    //let welcomeName = document.getElementById('welcomeNameId');
+    //welcomeName.innerHTML = arr[0].mentee;
     let ul = document.querySelector('ul');
     var matchNumber = 0;
     for (var i = 0; i < arr.length; i++) {
@@ -517,6 +517,80 @@ function matchMentor(match, userName) {
             console.log("UpdateMentorMatch method not called");
         }
     });
+}
+
+// POPULATE PROFILE PAGE DATA
+function populateProfile(userName) {
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/GetAccountData",
+        data: { "userName": userName },
+        dataType: 'text',
+        success: function (data) {
+            console.log(data);
+            var x2js = new X2JS();
+            var jsonObj = x2js.xml_str2json(data);
+            console.log(jsonObj);
+            var userInfo = jsonObj.ArrayOfAccount.Account;
+            //console.log(userInfo.userName);
+            populateWelcomeName(userInfo.userName);
+            loadMatchAccountData(userInfo.match);
+        }
+    });
+}
+
+function loadMatchAccountData(userName) {
+    $.ajax({
+        type: 'POST',
+        url: '../AccountServices.asmx/GetAccountData',
+        data: { "userName": userName },
+        dataType: 'text',
+        success: function (data) {
+            var x2js = new X2JS();
+            var jsonObj = x2js.xml_str2json(data);
+            console.log(jsonObj);
+            var userInfo = jsonObj.ArrayOfAccount.Account;
+            populateMatchUsername(userInfo.fName, userInfo.lName, userInfo.userName, userInfo.email);
+        }
+    });
+}
+
+function populateWelcomeName(name) {
+    let welcomeName = document.getElementById('welcomeNameId');
+    welcomeName.innerHTML = name;
+}
+
+function populateMatchUsername(firstName, lastName, username, email) { 
+    let matchName = document.getElementById('matchNameId');
+    let matchUsername = document.getElementById('matchUsernameId');
+    let matchEmail = document.getElementById('matchEmailId');
+
+    let matchString = firstName + " " + lastName;
+    let emailString = "mailto:" + email;
+
+    matchName.innerHTML = matchString;
+    matchUsername.innerHTML = username;
+    matchEmail.setAttribute('href', emailString);
+}
+
+//function populateMatchData(firstName, lastName, email) {
+//    let matchName = document.getElementById('matchNameId');
+//    let nameString = firstName + " " + lastName;
+//    matchName.innerHTML = nameString;
+//}
+
+function parseXml(data) {
+    let parsed = $.parseXml(data);
+    return parsed;
+    //var i, x, xmlDoc;
+    //var txt = "";
+    //parser = new DOMParser();
+    //xmlDoc = parser.parseFromString(data, "text/xml");
+    //x = xmlDoc.documentElement.childNodes;
+    //for (var i = 0; i < x.length; i++) {
+    //    txt += x[i].nodeName + ": " + x[i].childNodes[0].nodeValue + "<br>";
+    //}
+    //console.log(txt);
 }
 
 // Used to toggle the menu on smaller screens when clicking on the menu button

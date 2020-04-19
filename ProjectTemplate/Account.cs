@@ -13,5 +13,6 @@ namespace accountmanager
         public string email;
         public string password;
         public int userType;
+        public string match;
     }
 }
