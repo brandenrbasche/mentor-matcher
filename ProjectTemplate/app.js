@@ -436,6 +436,10 @@ function createList(matchNumber, matchName, commonality) {
 
     let hr = document.createElement('hr');
 
+    let divCard = document.createElement('div');
+    divCard.classList.add("w3-card-4 w3-round w3-white w3-padding");
+
+    document.body.appendChild(divCard);
     document.body.appendChild(h4);
     document.body.appendChild(p);
     document.body.appendChild(btn);
