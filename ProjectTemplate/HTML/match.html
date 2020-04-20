@@ -2,8 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="../app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/mmRegisterStyles.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script>
         window.addEventListener('load', event => {
             // not the most efficient way to go about this but it works! lmao
@@ -17,20 +26,56 @@
         });
     </script>
     <title>Pick Your Match</title>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #ecf0f1;
+        }
+
+        .btn {
+            margin: auto auto 9% auto;
+            width: 32%;
+        }
+
+        .container .row h2 {
+            text-align: center;
+            font-size: 5vh;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+               href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                <i class="fa fa-home w3-margin-right"></i>Career Success
+            </a>
+            <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right"
+               title="Sign In With My Another Account"><i class="fa fa-globe"></i></a>
+            <a href="mentor_register.html"
+               class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right"
+               title="Sign Up With A Mentor Account"><i class="fa fa-user"></i></a>
+        </div>
+
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="mentor_register.html" class="w3-bar-item w3-button w3-padding-large">Sign Up With A Mentor Account</a>
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Sign In With My Another Account</a>
+    </div>
+
     <div class="row">
         <div class="heading col-lg-12 col-md-12 skyblue">
-            <h1>Mentor Matcher</h1>
+            <!--<h1>Mentor Matcher</h1>-->
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="emptySpace col-lg-03 col-md-02"></div>
-            <div class="subheading col-lg-06 col-md-08">
-                <h2><i>Welcome, <span id="welcomeNameId"></span>. Choose your match:</i></h2>
-            </div>
-            <div class="emptySpace col-lg-03 col-md-02"></div>
+                <h2>Welcome, <span id="welcomeNameId"></span>. Choose your match:</h2>
         </div>
 
         <div class="row" id="matchSelectionGridId">
