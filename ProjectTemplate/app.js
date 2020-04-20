@@ -20,10 +20,6 @@ function formValidation(form) {
     else if (responses[4].value != responses[5].value) {
         alert("Passwords must match.");
     }
-    //else {
-    //    window.location.href = "index.html";
-    //    alert("Success! You have successfully registered an account! Please log in.")
-    //}
 
     if (window.location.href.includes("mentee_register.html")) {
         registerMentee(responses);
@@ -407,9 +403,8 @@ function newElement() {
 --------------------------------- */
 function getMatchData(arr) {
     console.log(arr);
-    populateWelcomeName(arr);
-    //let welcomeName = document.getElementById('welcomeNameId');
-    //welcomeName.innerHTML = arr[0].mentee;
+    let welcomeName = document.getElementById('welcomeNameId');
+    welcomeName.innerHTML = arr[0].mentee;
     let ul = document.querySelector('ul');
     var matchNumber = 0;
     for (var i = 0; i < arr.length; i++) {
@@ -455,14 +450,6 @@ function selectMentor(btnId) {
     console.log(btnId);
     let match = JSON.parse(localStorage.getItem("cleanMatches"));
     for (var i = 0; i < match.length; i++) {
-        //if (btnId.toString() === match[i].mentor.toString()) {
-        //    console.log('if condition working');
-        //    localStorage.setItem('matchInfo', match[i]);
-        //    matchMentee(match[i].mentee, match[i].mentor);
-        //    //window.location = "MenteeProfile.html";
-        //} else {
-        //    console.log('not working');
-        //}
         switch (btnId.toString()) {
             case match[i].mentor.toString():
                 console.log('switch working');
@@ -470,7 +457,6 @@ function selectMentor(btnId) {
                 matchMentee(match[i].mentee, match[i].mentor);
                 break;
         }
-        //break;
     }
 }
 
@@ -480,7 +466,6 @@ function matchMentee(userName, match) {
         "userName": userName,
         "match": match
     };
-
     $.ajax({
         type: 'POST',
         url: "../AccountServices.asmx/UpdateMenteeMatch",
@@ -488,7 +473,6 @@ function matchMentee(userName, match) {
         contentType: 'application/json; charset=utf-8;',
         dataType: 'json',
         success: function () {
-            //console.log('Sucesfully matched mentee with ' + match + "!");
             console.log("Succesfully called UpdateMenteeMatch method");
             matchMentor(match, userName);
         },
@@ -512,10 +496,9 @@ function matchMentor(match, userName) {
         contentType: 'application/json; charset=utf-8;',
         dataType: 'json',
         success: function () {
-            //console.log('Sucesfully matched mentee with ' + match + "!");
             console.log("Sucessfully called UpdateMentorMatch method");
             matchMentor(match, userName);
-            window.location = "index.html";
+            window.location = "MenteeProfile.html";
         },
         error: function () {
             console.log("UpdateMentorMatch method not called");
