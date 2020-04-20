@@ -121,7 +121,8 @@
                 window.addEventListener('load', function () {
                     console.log('onload function ran');
                     populateProfile(localStorage.getItem('userName'));
-                })
+                    getGoals(localStorage.getItem('userName'));
+                });
 
                 var myNodeList = document.getElementsByTagName('li');
                 for (var i = 0; i < myNodeList.length; i++) {

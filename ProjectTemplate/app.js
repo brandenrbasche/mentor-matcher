@@ -337,66 +337,84 @@ function passUserName() {
     welcomeName.innerHTML = userLogin;
 }
 
-function passMentorInfo() {
-
+var myNodeList = document.getElementsByTagName('li');
+for (var i = 0; i < myNodeList.length; i++) {
+    var span = document.createElement('span');
+    var text = document.createTextNode('\u00D7');
+    span.className = "close";
+    span.appendChild(text);
+    myNodeList[i].appendChild(span);
+}
+// Hide list item when close button is pressed
+var close = document.getElementsByClassName('close');
+for (var i = 0; i < close.length; i++) {
+    close[i].onclick = function () {
+        var div = this.parentElement;
+        div.style.display = "none";
+        console.log(div);
+    }
 }
 
-// Create a "close" button and append it to each list item
-var myNodelist = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < myNodelist.length; i++) {
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  myNodelist[i].appendChild(span);
-}
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
+var checkStatus = 1;
+var list = document.querySelector('ul');
+list.addEventListener('click', function (ev) {
+    if (ev.target.tagName === 'LI') {
+        checkStatus = 0;
+        ev.target.classList.toggle('checked');
+    }
+}, false);
+// Create a new list item when clicking the "add" button
+function newElement() {
+    var li = document.createElement('li');
+    var inputValue = document.getElementById('goalInput').value;
+    var t = document.createTextNode(inputValue);
+    console.log(inputValue);
+    li.appendChild(t);
+    if (inputValue === '') {
+        alert("You must write something!");
+    } else {
+        document.getElementById('goalUl').appendChild(li);
+    }
+    document.getElementById('goalInput').value = "";
+    var span = document.createElement('span');
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+    for (var i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+    let userName = localStorage.getItem('userName');
+    getData = {
+        "userName": userName,
+        "myGoal": inputValue,
+        "goalStatus": checkStatus
+    };
+    $.ajax({
+        type: 'POST',
+        url: "../AccountServices.asmx/InsertGoals",
+        data: JSON.stringify(getData),
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function (res) {
+            console.log(res);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
 }
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
-//list.addEventListener('click', function (ev) {
-//  if (ev.target.tagName === 'LI') {
-//    ev.target.classList.toggle('checked');
-//  }
-//}, false);
-
-// Create a new list item when clicking on the "Add" button
-function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("goalInput").value;
-  var t = document.createTextNode(inputValue);
-  li.appendChild(t);
-  if (inputValue === '') {
-    alert("You must write something!");
-  } else {
-    document.getElementById("goalUl").appendChild(li);
+list.addEventListener('click', function (ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
   }
-  document.getElementById("goalInput").value = "";
-
-  var span = document.createElement("SPAN");
-  var txt = document.createTextNode("\u00D7");
-  span.className = "close";
-  span.appendChild(txt);
-  li.appendChild(span);
-
-  for (i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
-      var div = this.parentElement;
-      div.style.display = "none";
-      div.style.display = "none";
-    }
-  }
-}
+}, false);
 
 /* -----------------------------
     PICK YOUR MATCH!
@@ -507,6 +525,66 @@ function matchMentor(match, userName) {
 }
 
 // POPULATE PROFILE PAGE DATA
+function getGoals(userName) {
+    $.ajax({
+        type: 'POST',
+        url: '../AccountServices.asmx/GetGoalData',
+        data: { "userName": userName },
+        dataType: 'text',
+        success: function (data) {
+            var json = convertXml(data);
+            var goalsJson = json.ArrayOfGoals.Goals;
+            for (var i = 0; i < goalsJson.length; i++) {
+                populateGoalUl(goalsJson[i].myGoal);
+            }
+        }
+    });
+}
+
+function populateGoalUl(goal) {
+    let goalUl = document.getElementById('goalUl');
+    let li = document.createElement('li');
+    li.innerHTML = goal;
+    goalUl.appendChild(li);
+    var span = document.createElement('span');
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+}
+
+function initGoals() {
+    var close = document.getElementsByClassName('close');
+    for (var i = 0; i < close.length; i++) {
+        close[i].onclick = function () {
+            var div = this.parentElement;
+            div.style.display = "none";
+        }
+    }
+}
+
+//var close = document.getElementsByClassName('close');
+//var close = document.querySelectorAll('.close');
+//console.log(close);
+//for (var i = 0; i < close.length; i++) {
+//    close[i].onclick = function () {
+//        console.log('closed');
+//        var div = this.parentElement;
+//        div.style.display = "none";
+//    }
+//}
+
+function deleteGoal() {
+    console.log('deleteGoal function ran');
+
+}
+
+function convertXml(xml) {
+    var x2js = new X2JS();
+    var jsonObj = x2js.xml_str2json(xml);
+    return jsonObj;
+}
+
 function populateProfile(userName) {
     $.ajax({
         type: 'POST',
@@ -519,7 +597,6 @@ function populateProfile(userName) {
             var jsonObj = x2js.xml_str2json(data);
             console.log(jsonObj);
             var userInfo = jsonObj.ArrayOfAccount.Account;
-            //console.log(userInfo.userName);
             populateWelcomeName(userInfo.userName);
             loadMatchAccountData(userInfo.match);
         }
@@ -560,25 +637,10 @@ function populateMatchUsername(firstName, lastName, username, email) {
     matchEmail.setAttribute('href', emailString);
 }
 
-//function populateMatchData(firstName, lastName, email) {
-//    let matchName = document.getElementById('matchNameId');
-//    let nameString = firstName + " " + lastName;
-//    matchName.innerHTML = nameString;
+//function parseXml(data) {
+//    let parsed = $.parseXml(data);
+//    return parsed;
 //}
-
-function parseXml(data) {
-    let parsed = $.parseXml(data);
-    return parsed;
-    //var i, x, xmlDoc;
-    //var txt = "";
-    //parser = new DOMParser();
-    //xmlDoc = parser.parseFromString(data, "text/xml");
-    //x = xmlDoc.documentElement.childNodes;
-    //for (var i = 0; i < x.length; i++) {
-    //    txt += x[i].nodeName + ": " + x[i].childNodes[0].nodeValue + "<br>";
-    //}
-    //console.log(txt);
-}
 
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
@@ -588,4 +650,8 @@ function openNav() {
     } else { 
       x.className = x.className.replace(" w3-show", "");
     }
-  }
+}
+
+/* -----------------------------
+    AJAX CALLS FOR GOAL TRACKING
+--------------------------------- */

@@ -495,17 +495,16 @@ namespace accountmanager
 		}
 
 		[WebMethod(true)]
-		public void InsertGoals(string userName, string myGoal, int goalStatus)
+		public void InsertGoals(string userName, string myGoal)
 		{
 			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
-			string sqlSelect = "INSERT INTO goals (userName, myGoal, goalStatus) VALUES (@userNameValue, @myGoalValue, @goalStatusValue);";
+			string sqlSelect = "INSERT INTO goals (userName, myGoal, goalStatus) VALUES (@userNameValue, @myGoalValue, 0);";
 
 			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
 			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
 
 			sqlCommand.Parameters.AddWithValue("@userNameValue", userName);
 			sqlCommand.Parameters.AddWithValue("@myGoalValue", myGoal);
-			sqlCommand.Parameters.AddWithValue("@goalStatusValue", goalStatus);
 
 			sqlConnection.Open();
 			try
@@ -562,6 +561,55 @@ namespace accountmanager
 			{
 				sqlConnection.Close();
 			}
+		}
+
+		[WebMethod(true)]
+		public accountmanager.Goals[] GetGoalData(string userName)
+		{
+			DataTable sqlDt = new DataTable("Goals");
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			string sqlSelect = "select * FROM goals where userName = @idValue order by userName";
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+
+			sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(userName));
+			MySqlDataAdapter sqlDa = new MySqlDataAdapter(sqlCommand);
+
+			sqlDa.Fill(sqlDt);
+
+			List<Goals> Goals = new List<Goals>();
+			for (int i = 0; i < sqlDt.Rows.Count; i++)
+			{
+				Goals.Add(new Goals
+				{
+					userName = sqlDt.Rows[i]["userName"].ToString(),
+					myGoal = sqlDt.Rows[i]["myGoal"].ToString(),
+					goalStatus = Convert.ToInt32(sqlDt.Rows[i]["goalStatus"])
+				});
+			}
+			return Goals.ToArray();
+		}
+
+		[WebMethod]
+		public void DeleteGoal(string userName, string myGoal)
+		{
+			string sqlConnectString = System.Configuration.ConfigurationManager.ConnectionStrings["pentest"].ConnectionString;
+			//this is a simple update, with parameters to pass in values
+			string sqlSelect = "delete from goals where userName=@idValue and myGoal=@myGoalValue";
+			MySqlConnection sqlConnection = new MySqlConnection(sqlConnectString);
+			MySqlCommand sqlCommand = new MySqlCommand(sqlSelect, sqlConnection);
+			//sqlCommand.Parameters.AddWithValue("@idValue", HttpUtility.UrlDecode(user_ID));
+			sqlCommand.Parameters.AddWithValue("@idValue", userName);
+			sqlCommand.Parameters.AddWithValue("@myGoalValue", myGoal);
+			sqlConnection.Open();
+			try
+			{
+				sqlCommand.ExecuteNonQuery();
+			}
+			catch (Exception e)
+			{
+			}
+			sqlConnection.Close();
 		}
 
 	}
