@@ -26,11 +26,51 @@
         });
     </script>
     <title>Pick Your Match</title>
+    <style>
+        body {
+            padding-top: 20px;
+            background-color: #ecf0f1;
+        }
+
+        .btn {
+            margin: auto auto 9% auto;
+            width: 32%;
+        }
+
+        .container .row h2 {
+            text-align: center;
+            font-size: 5vh;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+               href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+            <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
+                <i class="fa fa-home w3-margin-right"></i>Career Success
+            </a>
+            <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right"
+               title="Sign In With My Another Account"><i class="fa fa-globe"></i></a>
+            <a href="mentor_register.html"
+               class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right"
+               title="I am a Mentor"><i class="fa fa-user"></i></a>
+        </div>
+
+    </div>
+
+    <!-- Navbar on small screens -->
+    <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+        <a href="mentor_register.html" class="w3-bar-item w3-button w3-padding-large">I am a Mentor</a>
+        <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Sign In With My Another Account</a>
+    </div>
+
     <div class="row">
         <div class="heading col-lg-12 col-md-12 skyblue">
-            <h1>Mentor Matcher</h1>
+            <!--<h1>Mentor Matcher</h1>-->
         </div>
     </div>
     <div class="container">
