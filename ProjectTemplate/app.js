@@ -555,19 +555,19 @@ function getGoals(userName) {
             console.log('getGoals ajax call success')
             var json = convertXml(data);
             var goalsJson = json.ArrayOfGoals.Goals;
-
-            switch (goalsJson.length) {
-                case 0:
-                    break;
-                case 1:
-                    populateGoalUl(goalsJson.myGoal);
-                    break;
-                default:
-                    for (var i = 0; i < goalsJson.length; i++) {
-                        populateGoalUl(goalsJson[i].myGoal);
-                    }
-                    break;
-            }
+            
+            //switch (goalsJson.length) {
+            //    case 0:
+            //        break;
+            //    case 1:
+            //        populateGoalUl(goalsJson.myGoal);
+            //        break;
+            //    default:
+            //        for (var i = 0; i < goalsJson.length; i++) {
+            //            populateGoalUl(goalsJson[i].myGoal);
+            //        }
+            //        break;
+            //}
 
             //if (goalsJson.length = 0) {
             //    pass;
