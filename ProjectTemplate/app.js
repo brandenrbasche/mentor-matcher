@@ -2,6 +2,7 @@
     REGISTER FORM VALIDATION
 --------------------------------- */
 function formValidation(form) {
+    console.log(form);
     var responses = form.elements;
     console.log(responses);
     if (!form.checkValidity()) {
@@ -455,7 +456,8 @@ function createList(matchNumber, matchName, commonality) {
     let hr = document.createElement('hr');
 
     let divCard = document.createElement('div');
-    divCard.classList.add("w3-card-4 w3-round w3-white w3-padding");
+    //divCard.classList.add("w3-card-4 w3-round w3-white w3-padding");
+    //divCard.setAttribute("class", "w3-card-4 w3-padding");
 
     document.body.appendChild(divCard);
     document.body.appendChild(h4);
@@ -541,6 +543,7 @@ function getGoals(userName) {
             for (var i = 0; i < goalsJson.length; i++) {
                 populateGoalUl(goalsJson[i].myGoal);
             }
+            var close = document.getElementsByClassName('close');
         }
     });
 }
