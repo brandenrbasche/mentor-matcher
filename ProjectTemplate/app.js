@@ -436,6 +436,8 @@ function getMatchData(arr) {
 
 }
 
+
+
 // create account array here
 var myArr = [];
 
@@ -457,13 +459,23 @@ function createList(matchNumber, matchName, commonality) {
 
     let divCard = document.createElement('div');
     //divCard.classList.add("w3-card-4 w3-round w3-white w3-padding");
-    //divCard.setAttribute("class", "w3-card-4 w3-padding");
+    divCard.setAttribute("class", "w3-card w3-round w3-padding w3-white w3-center w3-margin w3-display");
+    //divCard.setAttribute("style", "width: 50% ");
+    divCard.style.cssText = ' padding: auto auto auto 100px; width: 200px; text-align: "center" }';
+    //divCard.innerHTML = '${h4}';
+    //document.body.appendChild(divCard);
+    //document.body.appendChild(h4);
+    //document.body.appendChild(p);
+    //document.body.appendChild(btn);
+    //document.body.appendChild(hr);
 
-    document.body.appendChild(divCard);
-    document.body.appendChild(h4);
-    document.body.appendChild(p);
-    document.body.appendChild(btn);
-    document.body.appendChild(hr);
+    var documentFragment = document.createDocumentFragment();
+    documentFragment.appendChild(divCard);
+    divCard.appendChild(h4);
+    divCard.appendChild(p);
+    divCard.appendChild(btn);
+    //divCard.appendChild(hr);
+    document.getElementById('mentorListId').appendChild(documentFragment);
 }
 
 function calcCommonality(commonality) {
