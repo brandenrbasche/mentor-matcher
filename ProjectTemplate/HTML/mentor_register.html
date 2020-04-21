@@ -4,17 +4,16 @@
     <meta charset="utf-8" />
     <title>Mentor Sign Up</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/mmRegisterStyles.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/mmRegisterStyles.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <style>
         body {
             padding-top: 20px;
@@ -26,28 +25,18 @@
             width: 32%;
         }
     </style>
-
 </head>
-<body class="w3-theme-15">
 
+<body class="w3-theme-15">
     <!-- Navbar -->
     <div class="w3-top">
         <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
-               href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-            <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4">
-                <i class="fa fa-home w3-margin-right"></i>Career Success
-            </a>
-            <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Sign In With My Existing Account">
-                <i class="fa fa-globe"></i>
-            </a>
-            <a href="mentee_register.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right"
-               title="I am a Mentee"><i class="fa fa-user"></i></a>
+            <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+            <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Mentor Matcher</a>
+            <a href="index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="Login">Login</i></a>
+            <a href="mentee_register.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white w3-right" title="I'm a Mentor">Register as a Mentee</i></a>
         </div>
-
     </div>
-    
-
     <!-- Navbar on small screens -->
     <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
         <a href="mentee_register.html" class="w3-bar-item w3-button w3-padding-large">I am a Mentee</a>
@@ -55,146 +44,102 @@
     </div>
     <!-- Page Container -->
     <div class="w3-container w3-content" style="max-width:1400px;margin-top:30px">
-
         <div class="heading">
             <h2>Hi, Mentor!</h2>
         </div>
-        <!-- The Grid -->
-        <div class="w3-row-padding">
-            <!-- Left Column -->
-            <div class="w3-col l4 m5 s12">
-
-                <!-- Personal Info -->
-                <div class="w3-card w3-round w3-white w3-padding">
-                    <div class="w3-container">
-    <div class="register">
         <form class="registrationForm" id="registrationFormId">
-            <h3>Personal Info</h3>
-            <label for="userName">User Name: </label><br class="w3-hide-small w3-hide-large">
-            <input type="text" placeholder="" id="userName" required><br />
-            <label for="fNameInputId">First Name: </label><br class="w3-hide-small w3-hide-large">
-            <input type="text" placeholder="" id="fNameInputId" required /><br />
-            <label for="lNameInputId">Last Name: </label><br class="w3-hide-small w3-hide-large">
-            <input type="text" placeholder="" id="lNameInputId" required /><br />
-            <label for="emailInputId">Email: </label><br class="w3-hide-small w3-hide-large">
-            <input type="email" placeholder="" id="emailInputId"
-                required /><br />
-            <label for="passwordInputId">Password: </label><br class="w3-hide-small w3-hide-large">
-            <input type="password" placeholder="" id="passwordInputId"
-                required /><br />
-            <label for="confirmPassInputId">Confirm Password: </label><br
-                class="w3-hide-small w3-hide-large">
-            <input type="password" placeholder="" id="confirmPassInputId"
-                required />
-    </div>
-    <!-- End of Register Class -->
-</div>
-<!-- End of w3-container -->
-</div>
-<!-- End of Left Card -->
-</div>
-<!-- End of Left Column -->
-<br class="w3-hide-medium w3-hide-large">
-<br class="w3-hide-medium w3-hide-large">
-<br class="w3-hide-medium w3-hide-large">
-<!-- Right Column -->
-<div class="w3-col l8 m7 s12">
-                        <div class="register">
-                            <form class="registrationForm" id="registrationFormId">
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+                <!-- Left Column -->
+                <div class="w3-col l4 m5 s12">
+                    <!-- Personal Info -->
+                    <div class="w3-card w3-round w3-white w3-padding">
+                        <div class="w3-container">
+                            <div class="register">
+                                <!--<form class="registrationForm" id="registrationFormId">-->
                                 <h3>Personal Info</h3>
                                 <label for="userName">User Name: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="text" placeholder="e.g. uarebeautiFul911" id="userName" required><br />
+                                <input type="text" placeholder="" id="userName" required><br />
                                 <label for="fNameInputId">First Name: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="text" placeholder="First" id="fNameInputId" required /><br />
+                                <input type="text" placeholder="" id="fNameInputId" required /><br />
                                 <label for="lNameInputId">Last Name: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="text" placeholder="Last" id="lNameInputId" required /><br />
+                                <input type="text" placeholder="" id="lNameInputId" required /><br />
                                 <label for="emailInputId">Email: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="email" placeholder="helloWorld@gmail.com" id="emailInputId"
+                                <input type="email" placeholder="" id="emailInputId"
                                        required /><br />
                                 <label for="passwordInputId">Password: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="password" placeholder="e.g. i5Love2My0World!" id="passwordInputId"
+                                <input type="password" placeholder="" id="passwordInputId"
                                        required /><br />
                                 <label for="confirmPassInputId">Confirm Password: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="password" placeholder="i5Love2My0World!" id="confirmPassInputId"
-                                       required />
+                                <input type="password" placeholder="" id="confirmPassInputId" required />
+                            </div>
+                            <!-- End of Register Class -->
                         </div>
-                        <!-- End of Register Class -->
+                        <!-- End of w3-container -->
                     </div>
-                    <!-- End of w3-container -->
+                    <!-- End of Left Card -->
                 </div>
-                <!-- End of Left Card -->
-            </div>
-            <!-- End of Left Column -->
-            <br class="w3-hide-medium w3-hide-large">
-            <br class="w3-hide-medium w3-hide-large">
-            <br class="w3-hide-medium w3-hide-large">
-            <!-- Right Column -->
-            <div class="w3-col l8 m7 s12">
-
-                <div class="w3-card w3-round w3-white">
-                    <div class="w3-container w3-padding">
-                        <h3>Questionnaire</h3>
-                        <div class="alert alert-info">
-                            <strong>Info!</strong> This data will be used to match you with the best possible mentor.
-                            There is no right
-                            or
-                            wrong answer!
+                <!-- End of Left Column -->
+                <br class="w3-hide-medium w3-hide-large">
+                <br class="w3-hide-medium w3-hide-large">
+                <br class="w3-hide-medium w3-hide-large">
+                <!-- Right Column -->
+                <div class="w3-col l8 m7 s12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h3>Questionnaire</h3>
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> This data will be used to match you with the best possible mentor.
+                                There is no right
+                                or
+                                wrong answer!
+                            </div>
+                            <label for="q1">What are your professional goals?</label>
+                            <select id="q1Id" name="q2" required>
+                                <option></option>
+                                <option value="1">Vertical movement within the company</option>
+                                <option value="2">Financial success (high net worth)</option>
+                                <option value="3">A strong network (having strong connections)</option>
+                            </select>
+                            <br><br>
+                            <label for="q2">What do you look for most in a company?</label>
+                            <select id="q2Id" name="q2" required>
+                                <option></option>
+                                <option value="4">Work/life balance</option>
+                                <option value="5">Collaborative workspace</option>
+                                <option value="6">Closed workspace (cubicles)</option>
+                                <option value="7">Movement within the company</option>
+                                <option value="8">Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
+                                <option value="9">Flexibility (work from home, PTO, etc.)</option>
+                            </select>
+                            <br><br>
+                            <label for="q3">What do you look for most in a mentee?</label>
+                            <select id="q3Id" name="q3" required>
+                                <option></option>
+                                <option value="10">Age similarity</option>
+                                <option value="11">Relevant industry expertise/experience</option>
+                                <option value="12">Same career trajectory (mentor in the same position as mentee last year)</option>
+                                <option value="13">Reliability (someone who replies quickly and is always there when needed)</option>
+                                <option value="14">Professional development assistance (someone to look over resume, cover letter, LinkedIn, etc.)</option>
+                            </select>
+                            <br><br>
+                            <label for="q4">How involved would you like your mentor to be?</label>
+                            <select id="q4Id" name="q4" required>
+                                <option></option>
+                                <option value="15">Highly involved</option>
+                                <option value="16">Somewhat involved</option>
+                                <option value="17">Indifferent</option>
+                                <option value="18">Rarely involved</option>
+                            </select>
                         </div>
-
-                        <label for="q1">What are your professional goals?</label>
-                        <select id="q1Id" name="q2" required>
-                            <option></option>
-                            <option value="1">Vertical movement within the company</option>
-                            <option value="2">Financial success (high net worth)</option>
-                            <option value="3">A strong network (having strong connections)</option>
-                        </select>
-                        <br><br>
-                        <label for="q2">What do you look for most in a company?</label>
-                        <select id="q2Id" name="q2" required>
-                            <option></option>
-                            <option value="4">Work/life balance</option>
-                            <option value="5">Collaborative workspace</option>
-                            <option value="6">Closed workspace (cubicles)</option>
-                            <option value="7">Movement within the company</option>
-                            <option value="8">Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
-                            <option value="9">Flexibility (work from home, PTO, etc.)</option>
-                        </select>
-                        <br><br>
-                        <label for="q3">What do you look for most in a mentor?</label>
-                        <select id="q3Id" name="q3" required>
-                            <option></option>
-                            <option value="10">Age similarity</option>
-                            <option value="11">Relevant industry expertise/experience</option>
-                            <option value="12">Same career trajectory (mentor in the same position as mentee last year)</option>
-                            <option value="13">Reliability (someone who replies quickly and is always there when needed)</option>
-                            <option value="14">Professional development assistance (someone to look over resume, cover letter, LinkedIn, etc.)</option>
-                        </select>
-                        <br><br>
-                        <label for="q4">How involved would you like your mentee to be?</label>
-                        <select id="q4Id" name="q4" required>
-                            <option></option>
-                            <option value="15">Highly involved</option>
-                            <option value="16">Somewhat involved</option>
-                            <option value="17">Indifferent</option>
-                            <option value="18">Rarely involved</option>
-                        </select>
                     </div>
                 </div>
-
-
             </div>
-        </div>
             <br /><br />
             <button type="button" class="btn btn-lg btn-primary btn-block" onclick="formValidation(this.form)">Sign Up</button>
-            </form>
-        <br /><br />
-        <button type="button" class="btn btn-lg btn-primary btn-block" onclick="formValidation(this.form)">
-            Sign
-            Up
-        </button>
         </form>
-    </div>
-
+    </div>  
     <script src="../app.js"></script>
 </body>
+
 </html>

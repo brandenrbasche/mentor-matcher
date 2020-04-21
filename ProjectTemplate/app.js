@@ -567,21 +567,7 @@ function getGoals(userName) {
                         populateGoalUl(goalsJson[i].myGoal);
                     }
                     break;
-            }
-
-            //if (goalsJson.length = 0) {
-            //    pass;
-            //} else if (goalsJson.length < 2) {
-            //    populateGoalUl(goalsJson.myGoal);
-            //} else {
-            //    for (var i = 0; i < goalsJson.lengthl i++) {
-            //        populateGoalUl(goalsJson[i].myGoal);
-            //    }
-            //}
-            //for (var i = 0; i < goalsJson.length; i++) {
-            //    console.log(goalsJson[i].myGoal)
-            //    populateGoalUl(goalsJson[i].myGoal);
-            //}         
+            }    
         }
     });
 }
