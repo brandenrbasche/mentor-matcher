@@ -34,6 +34,7 @@ function formValidation(form) {
     MENTEE REGISTRATION
 --------------------------------- */
 function registerMentee(responses) {
+    console.log(responses);
     let userName = responses[0].value;
     var menteeResponses = {
         "userName": responses[0].value,
@@ -59,7 +60,6 @@ function registerMentee(responses) {
             "userName": responses[0].value,
             "responseId": responses[i+6].value
         }
-        // Inserts responseObj into user_responses_table!
         $.ajax({
             type: 'POST',
             url: '../AccountServices.asmx/InsertResponseValues',
@@ -522,7 +522,8 @@ function matchMentor(match, userName) {
         success: function () {
             console.log("Sucessfully called UpdateMentorMatch method");
             matchMentor(match, userName);
-            window.location = "MenteeProfile.html";
+            window.location = "index.html";
+            alert('Sucesfully matched with ' + match + "! You may now log in.");
         },
         error: function () {
             console.log("UpdateMentorMatch method not called");
@@ -532,23 +533,49 @@ function matchMentor(match, userName) {
 
 // POPULATE PROFILE PAGE DATA
 function getGoals(userName) {
+    console.log('getGoals function ran')
     $.ajax({
         type: 'POST',
         url: '../AccountServices.asmx/GetGoalData',
         data: { "userName": userName },
         dataType: 'text',
         success: function (data) {
+            console.log('getGoals ajax call success')
             var json = convertXml(data);
             var goalsJson = json.ArrayOfGoals.Goals;
-            for (var i = 0; i < goalsJson.length; i++) {
-                populateGoalUl(goalsJson[i].myGoal);
+
+            switch (goalsJson.length) {
+                case 0:
+                    break;
+                case 1:
+                    populateGoalUl(goalsJson.myGoal);
+                    break;
+                default:
+                    for (var i = 0; i < goalsJson.length; i++) {
+                        populateGoalUl(goalsJson[i].myGoal);
+                    }
+                    break;
             }
-            var close = document.getElementsByClassName('close');
+
+            //if (goalsJson.length = 0) {
+            //    pass;
+            //} else if (goalsJson.length < 2) {
+            //    populateGoalUl(goalsJson.myGoal);
+            //} else {
+            //    for (var i = 0; i < goalsJson.lengthl i++) {
+            //        populateGoalUl(goalsJson[i].myGoal);
+            //    }
+            //}
+            //for (var i = 0; i < goalsJson.length; i++) {
+            //    console.log(goalsJson[i].myGoal)
+            //    populateGoalUl(goalsJson[i].myGoal);
+            //}         
         }
     });
 }
 
 function populateGoalUl(goal) {
+    console.log('populatGoalUl function ran')
     let goalUl = document.getElementById('goalUl');
     let li = document.createElement('li');
     li.innerHTML = goal;
@@ -570,20 +597,8 @@ function initGoals() {
     }
 }
 
-//var close = document.getElementsByClassName('close');
-//var close = document.querySelectorAll('.close');
-//console.log(close);
-//for (var i = 0; i < close.length; i++) {
-//    close[i].onclick = function () {
-//        console.log('closed');
-//        var div = this.parentElement;
-//        div.style.display = "none";
-//    }
-//}
-
 function deleteGoal() {
     console.log('deleteGoal function ran');
-
 }
 
 function convertXml(xml) {

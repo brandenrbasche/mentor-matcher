@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8" />
     <title>Mentee Sign Up</title>
@@ -61,16 +60,17 @@
             <h2>Hi, Mentee!</h2>
         </div>
 
-        <!-- The Grid -->
-        <div class="w3-row-padding">
-            <!-- Left Column -->
-            <div class="w3-col l4 m5 s12">
+        <form class="registrationForm" id="registrationFormId">
+            <!-- The Grid -->
+            <div class="w3-row-padding">
+                <!-- Left Column -->
+                <div class="w3-col l4 m5 s12">
 
-                <!-- Personal Info -->
-                <div class="w3-card w3-round w3-white w3-padding">
-                    <div class="w3-container">
-                        <div class="register">
-                            <form class="registrationForm" id="registrationFormId">
+                    <!-- Personal Info -->
+                    <div class="w3-card w3-round w3-white w3-padding">
+                        <div class="w3-container">
+                            <div class="register">
+                                <!--<form class="registrationForm" id="registrationFormId">-->
                                 <h3>Personal Info</h3>
                                 <label for="userName">User Name: </label><br class="w3-hide-small w3-hide-large">
                                 <input type="text" placeholder="" id="userName" required><br />
@@ -85,91 +85,76 @@
                                 <input type="password" placeholder="" id="passwordInputId"
                                        required /><br />
                                 <label for="confirmPassInputId">Confirm Password: </label><br class="w3-hide-small w3-hide-large">
-                                <input type="password" placeholder="" id="confirmPassInputId"
-                                       required />
-
+                                <input type="password" placeholder="" id="confirmPassInputId" required />
+                            </div>
+                            <!-- End of Register Class -->
                         </div>
-                        <!-- End of Register Class -->
+                        <!-- End of w3-container -->
                     </div>
-                    <!-- End of w3-container -->
+                    <!-- End of Left Card -->
                 </div>
-                <!-- End of Left Card -->
-            </div>
-            <!-- End of Left Column -->
-            <br class="w3-hide-medium w3-hide-large">
-            <br class="w3-hide-medium w3-hide-large">
-            <br class="w3-hide-medium w3-hide-large">
-            <!-- Right Column -->
-            <div class="w3-col l8 m7 s12">
-
-                <div class="w3-card w3-round w3-white">
-                    <div class="w3-container w3-padding">
-                        <h3>Questionnaire</h3>
-                        <div class="alert alert-info">
-                            <strong>Info!</strong> This data will be used to match you with the best possible mentor.
-                            There is no right
-                            or
-                            wrong answer!
+                <!-- End of Left Column -->
+                <br class="w3-hide-medium w3-hide-large">
+                <br class="w3-hide-medium w3-hide-large">
+                <br class="w3-hide-medium w3-hide-large">
+                <!-- Right Column -->
+                <div class="w3-col l8 m7 s12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h3>Questionnaire</h3>
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> This data will be used to match you with the best possible mentor.
+                                There is no right
+                                or
+                                wrong answer!
+                            </div>
+                            <label for="q1">What are your professional goals?</label>
+                            <select id="q1Id" name="q2" required>
+                                <option></option>
+                                <option value="1">Vertical movement within the company</option>
+                                <option value="2">Financial success (high net worth)</option>
+                                <option value="3">A strong network (having strong connections)</option>
+                            </select>
+                            <br><br>
+                            <label for="q2">What do you look for most in a company?</label>
+                            <select id="q2Id" name="q2" required>
+                                <option></option>
+                                <option value="4">Work/life balance</option>
+                                <option value="5">Collaborative workspace</option>
+                                <option value="6">Closed workspace (cubicles)</option>
+                                <option value="7">Movement within the company</option>
+                                <option value="8">Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
+                                <option value="9">Flexibility (work from home, PTO, etc.)</option>
+                            </select>
+                            <br><br>
+                            <label for="q3">What do you look for most in a mentor?</label>
+                            <select id="q3Id" name="q3" required>
+                                <option></option>
+                                <option value="10">Age similarity</option>
+                                <option value="11">Relevant industry expertise/experience</option>
+                                <option value="12">Same career trajectory (mentor in the same position as mentee last year)</option>
+                                <option value="13">Reliability (someone who replies quickly and is always there when needed)</option>
+                                <option value="14">Professional development assistance (someone to look over resume, cover letter, LinkedIn, etc.)</option>
+                            </select>
+                            <br><br>
+                            <label for="q4">How involved would you like your mentor to be?</label>
+                            <select id="q4Id" name="q4" required>
+                                <option></option>
+                                <option value="15">Highly involved</option>
+                                <option value="16">Somewhat involved</option>
+                                <option value="17">Indifferent</option>
+                                <option value="18">Rarely involved</option>
+                            </select>
                         </div>
-
-                        <label for="q1">What are your professional goals?</label>
-                        <select id="q1Id" name="q2" required>
-                            <option></option>
-                            <option value="1">Vertical movement within the company</option>
-                            <option value="2">Financial success (high net worth)</option>
-                            <option value="3">A strong network (having strong connections)</option>
-                        </select>
-                        <br><br>
-                        <label for="q2">What do you look for most in a company?</label>
-                        <select id="q2Id" name="q2" required>
-                            <option></option>
-                            <option value="4">Work/life balance</option>
-                            <option value="5">Collaborative workspace</option>
-                            <option value="6">Closed workspace (cubicles)</option>
-                            <option value="7">Movement within the company</option>
-                            <option value="8">Employee bonding events (team offsite events, ex/ Topgolf with the team)</option>
-                            <option value="9">Flexibility (work from home, PTO, etc.)</option>
-                        </select>
-                        <br><br>
-                        <label for="q3">What do you look for most in a mentor?</label>
-                        <select id="q3Id" name="q3" required>
-                            <option></option>
-                            <option value="10">Age similarity</option>
-                            <option value="11">Relevant industry expertise/experience</option>
-                            <option value="12">
-                                Same career trajectory (mentor in the same position as mentee
-                                last year)
-                            </option>
-                            <option value="13">
-                                Reliability (someone who replies quickly and is always there when
-                                needed)
-                            </option>
-                            <option value="14">
-                                Professional development assistance (someone to look over resume,
-                                cover
-                                letter,
-                                LinkedIn, etc.)
-                            </option>
-                        </select>
-                        <br><br>
-                        <label for="q4">How involved would you like your mentor to be?</label>
-                        <select id="q4Id" name="q4" required>
-                            <option></option>
-                            <option value="15">Highly involved</option>
-                            <option value="16">Somewhat involved</option>
-                            <option value="17">Indifferent</option>
-                            <option value="18">Rarely involved</option>
-                        </select>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <br /><br />
-        <button type="button" class="btn btn-lg btn-primary btn-block" onclick="formValidation(this.form)">Sign Up</button>
+            <br /><br />
+            <button type="button" class="btn btn-lg btn-primary btn-block" onclick="formValidation(this.form)">Sign Up</button>
         </form>
-
     </div>
+
+
     
     <script src="../app.js"></script>
 </body>

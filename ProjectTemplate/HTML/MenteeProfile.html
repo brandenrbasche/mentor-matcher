@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Overpass:wght@100;400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../CSS/profileStyles.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/x2js/1.2.0/xml2json.min.js"></script>
     <title>Mentee Profile</title>
     <style>
@@ -29,18 +30,18 @@
             padding: 0;
         }
 
-            .list-wrapper ul li {
-                cursor: pointer;
-                position: relative;
-                padding: 12px 8px 12px 40px;
-                transition: .2s;
-                user-select: none;
-            }
+        .list-wrapper ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 12px 8px 12px 40px;
+            transition: .2s;
+            user-select: none;
+        }
 
-                /* change color of item on hover */
-                .list-wrapper ul li:hover {
-                    background: #ecf0f1;
-                }
+        /* change color of item on hover */
+        .list-wrapper ul li:hover {
+            background: #ecf0f1;
+        }
 
         /* strike out text when checked */
         ul li.checked {
@@ -49,19 +50,19 @@
             text-decoration: line-through;
         }
 
-            /* Add a check mark when clicked on! */
-            ul li.checked::before {
-                content: '';
-                position: absolute;
-                border-color: #fff;
-                border-style: solid;
-                border-width: 0 2px 2px 0;
-                top: 10px;
-                left: 16px;
-                transform: rotate(45deg);
-                height: 15px;
-                width: 7px;
-            }
+        /* Add a check mark when clicked on! */
+        ul li.checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 10px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 15px;
+            width: 7px;
+        }
 
         /* style the close button  */
         .close {
@@ -71,16 +72,16 @@
             padding: 12px 16px 12px 16px;
         }
 
-            .close:hover {
-                background-color: #f44336;
-                color: white;
-            }
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="index.html">Mentor Matcher</a>
+        <a class="navbar-brand" href="index.html">Career Success</a>
         <a class="nav-link active" href="index.html">Log Out</a>
     </nav>
 
@@ -98,9 +99,9 @@
                     <div class="card-body">
                         <h4 class="card-title">Goal Tracker</h4>
                         <div class="add-items d-flex">
-                            <input type="text" class="form-control todo-list-input"
-                                   placeholder="I want to..." id="goalInput"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn" onclick="newElement()"
-                                                                                      id="addBtn">
+                            <input type="text" class="form-control todo-list-input" placeholder="I want to..."
+                                id="goalInput"> <button class="add btn btn-primary font-weight-bold todo-list-add-btn"
+                                onclick="newElement()" id="addBtn">
                                 Add
                             </button>
                         </div>
@@ -126,9 +127,10 @@
             <script>
                 window.addEventListener('load', function () {
                     console.log('onload function ran');
+                    console.log(localStorage.getItem('userName'));
                     populateProfile(localStorage.getItem('userName'));
                     getGoals(localStorage.getItem('userName'));
-                    initGoals();
+                    //initGoals();
                 });
 
                 var myNodeList = document.getElementsByTagName('li');
@@ -185,7 +187,7 @@
                     }
                 }
             </script>
-            <script src="../app.js"></script> 
+            <script src="../app.js"></script>
 </body>
 
 </html>
