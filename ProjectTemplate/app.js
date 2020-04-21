@@ -475,7 +475,7 @@ function createList(matchNumber, matchName, commonality) {
     divCard.appendChild(p);
     divCard.appendChild(btn);
     //divCard.appendChild(hr);
-    document.body.appendChild(documentFragment);
+    document.getElementById('mentorListId').appendChild(documentFragment);
 }
 
 function calcCommonality(commonality) {
